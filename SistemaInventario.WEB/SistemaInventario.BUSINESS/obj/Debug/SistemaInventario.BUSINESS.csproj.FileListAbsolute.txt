@@ -1,0 +1,13 @@
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.BUSINESS.dll
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.BUSINESS.pdb
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.CLIENTS.dll
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.ENTITY.dll
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.CLIENTS.pdb
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.ENTITY.pdb
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.csprojAssemblyReference.cache
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.csproj.CoreCompileInputs.cache
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.csproj.CopyComplete
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.dll
+C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.pdb

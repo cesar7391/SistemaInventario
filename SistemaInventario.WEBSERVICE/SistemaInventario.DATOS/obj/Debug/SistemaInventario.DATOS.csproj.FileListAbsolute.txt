@@ -1,0 +1,9 @@
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.csprojAssemblyReference.cache
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.csproj.CoreCompileInputs.cache
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.DATOS.dll
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.DATOS.pdb
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.ENTITY.dll
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.ENTITY.pdb
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.csproj.CopyComplete
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.dll
+C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.pdb
