@@ -7,3 +7,12 @@ C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATO
 C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.csproj.CopyComplete
 C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.dll
 C:\Users\César\source\repos\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.pdb
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.DATOS.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.DATOS.pdb
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.ENTITY.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\bin\Debug\SistemaInventario.ENTITY.pdb
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.csprojAssemblyReference.cache
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.csproj.CoreCompileInputs.cache
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.csproj.CopyComplete
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEBSERVICE\SistemaInventario.DATOS\obj\Debug\SistemaInventario.DATOS.pdb

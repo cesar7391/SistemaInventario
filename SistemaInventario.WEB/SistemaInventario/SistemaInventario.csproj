@@ -125,6 +125,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\RegistroEmpresaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -333,6 +334,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\empleados.js" />
     <Content Include="Scripts\app\panel.js" />
+    <Content Include="Scripts\app\productos.js" />
     <Content Include="Scripts\app\proveedores.js" />
     <Content Include="Scripts\app\registroempresa.js" />
     <Content Include="Scripts\js\global.js" />
@@ -370,6 +372,7 @@
     <Content Include="Views\Panel\Panel.cshtml" />
     <Content Include="Views\Empleados\Empleados.cshtml" />
     <Content Include="Views\Proveedores\Proveedores.cshtml" />
+    <Content Include="Views\Productos\Productos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SistemaInventario.BUSINESS\SistemaInventario.BUSINESS.csproj">

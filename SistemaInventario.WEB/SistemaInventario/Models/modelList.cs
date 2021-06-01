@@ -14,9 +14,13 @@ namespace SistemaInventario.Models
         public List<ResponsePImpuesto> listPImpuesto { get; set; }
         public ResponseRegistroEmpresa msjActivarCuenta { get; set; }
 
-        //*********************************
+        //********************************* EMPLEADOS
+
         public List<ResponseEmpleados> listaEmpleados { get; set; }
         public List<ResponseEmpleados> listaCargos { get; set; }
 
+        //********************************* PROVEEDORES
+
+        public List<ResponseProveedores> listaProveedores { get; set; }
     }
 }

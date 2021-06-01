@@ -16,6 +16,7 @@ namespace SistemaInventario.ENTITY.Response
         public string telefono { get; set; }
         public string email { get; set; }
         public string direccion { get; set; }
+
         public int status { get; set; }
     }
 }

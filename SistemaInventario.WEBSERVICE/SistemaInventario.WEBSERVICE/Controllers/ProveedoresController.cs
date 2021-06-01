@@ -37,7 +37,7 @@ namespace SistemaInventario.WEBSERVICE.Controllers
             }
         }
 
-        /*
+        
         [HttpPost]
         [Route("listarProveedores")]
         public IHttpActionResult listarProveedores(ENProveedores paramss)
@@ -49,12 +49,11 @@ namespace SistemaInventario.WEBSERVICE.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-
+        
         [HttpPost]
         [Route("desactivarProveedor")]
         public IHttpActionResult desactivarProveedor(ENProveedores paramss)
@@ -66,11 +65,11 @@ namespace SistemaInventario.WEBSERVICE.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
+        
         [HttpPost]
         [Route("activarProveedor")]
         public IHttpActionResult activarProveedor(ENProveedores paramss)
@@ -82,12 +81,11 @@ namespace SistemaInventario.WEBSERVICE.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-
+        
         [HttpPost]
         [Route("eliminarProveedor")]
         public IHttpActionResult eliminarProveedor(ENProveedores paramss)
@@ -99,11 +97,10 @@ namespace SistemaInventario.WEBSERVICE.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
+        
         [HttpPost]
         [Route("obteditarProveedor")]
         public IHttpActionResult obteditarProveedor(ENProveedores paramss)
@@ -115,19 +112,17 @@ namespace SistemaInventario.WEBSERVICE.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-
         [HttpPost]
-        [Route("editarProv")]
-        public IHttpActionResult editarProv(ENProveedores paramss)
+        [Route("editarProveedor")]
+        public IHttpActionResult editarProveedor(ENProveedores paramss)
         {
             try
             {
-                var rpt = daProveedores.editarProv(paramss);
+                var rpt = daProveedores.editarProveedor(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
@@ -135,7 +130,6 @@ namespace SistemaInventario.WEBSERVICE.Controllers
 
                 throw ex;
             }
-        }
-        */
+        }        
     }
 }

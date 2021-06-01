@@ -1,17 +1,19 @@
-﻿
+﻿@model modelList
+@using SistemaInventario.Models
 @{
     ViewBag.Title = "Proveedores";
 }
+<br />
+<br />
+<br />
 
-<br />
-<br />
-<br />
 <div class="panel panel-info">
 
     <div class="panel-heading">
         <label><b><span id="lblinicial"></span></b></label>
 
         <button type="button" class="btn btn-danger btn-sm" style="float:right;" id="cerrarModulo"><i class="fa fa-window-close"></i></button>
+
     </div>
 
     <div class="panel-body">
@@ -20,34 +22,36 @@
 
             <div class="col-md-12">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-info btn-sm" style="float:right" id="btnnewproveedor"><i class="fa fa-plus-square"></i> Nuevo</button>
-                    <hr />
+                    <button type="button" class="btn btn-info btn-sm" style="float:right;" id="btnnewproveedor"><i class="fa fa-plus-square"></i> Nuevo</button>
                 </div>
             </div>
 
             <div class="col-md-12">
                 <hr />
                 <div class="col-md-12">
-                    <table class="table table-condensed table-bordered table-hover dt-responsive tablas">
+
+                    <table class="table table-condensed table-bordered table-hover dt-reponsive tablas">
                         <thead>
                             <tr>
                                 <th>RUC</th>
-                                <th>Razón Social</th>
+                                <th>Razon Social</th>
                                 <th>Email</th>
-                                <th>Teléfono</th>
-                                <th>Dirección</th>
+                                <th>Telefono</th>
+                                <th>Direccion</th>
+                                <th>Estado</th>
+                                <th>opciones</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @*@foreach (var item in Model.listaEmpleados)
+                            @foreach (var item in Model.listaProveedores)
                             {
                                 <tr>
-                                    <td>@item.username</td>
-                                    <td>@item.dni</td>
-                                    <td>@item.user</td>
+                                    <td>@item.ruc</td>
+                                    <td>@item.razonsocial</td>
                                     <td>@item.email</td>
-                                    <td>@item.cargo</td>
+                                    <td>@item.telefono</td>
+                                    <td>@item.direccion</td>
 
                                     @if (item.status == 0)
                                     {
@@ -55,8 +59,8 @@
                                             <span style="background: #ff0000; color: #fff">Desactivado</span>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-success btn-sm btnactivar" Activar="@item.idUser"><i class="fa fa-check"></i></button>
-                                            <button type="button" class="btn btn-danger btn-sm btneliminar" Eliminar="@item.idUser"><i class="fa fa-trash"></i></button>
+                                            <button type="button" class="btn btn-success btn-sm btnactivar" Activar="@item.idprov"><i class="fa fa-check"></i></button>
+                                            <button type="button" class="btn btn-danger btn-sm btneliminar" Eliminar="@item.idprov"><i class="fa fa-trash"></i></button>
                                         </td>
                                     }
                                     else if (item.status == 1)
@@ -65,19 +69,16 @@
                                             <span style="background: #00631a; color: #fff">Activado</span>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-danger btn-sm btndesactivar" Desactivar="@item.idUser"><i class="fa fa-times"></i></button>
-                                            <button type="button" class="btn btn-warning btn-sm btneditar" editar="@item.idUser"><i class="fa fa-pencil"></i></button>
+                                            <button type="button" class="btn btn-danger btn-sm btndesactivar" Desactivar="@item.idprov"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-warning btn-sm btneditar" editar="@item.idprov"><i class="fa fa-pencil"></i></button>
                                         </td>
                                     }
-
                                 </tr>
-                            }*@
-
+                            }
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
 
         <div class="divnewprovedor">
@@ -85,14 +86,14 @@
             <div class="col-md-12">
 
                 <div class="col-md-4">
-                    <span><label><b>RFC:</b></label></span>
-                    <input type="text" class="form-control" id="txtpruc" placeholder="Ingrese el RFC" required onkeypress="return solonumeros(event)" />
+                    <span><label><b>RUC:</b></label></span>
+                    <input type="text" class="form-control" id="txtpruc" placeholder="Ingrese el ruc" required onkeypress="return solonumeros(event)" />
                     <span id="msjruc"></span>
                 </div>
 
                 <div class="col-md-8">
-                    <span><label><b>Razón Social:</b></label></span>
-                    <input type="text" class="form-control" id="txtprazonsocial" placeholder="Ingrese la razón social" required />
+                    <span><label><b>RAZON SOCIAL:</b></label></span>
+                    <input type="text" class="form-control" id="txtprazonsocial" placeholder="Ingrese la razon social" required />
                     <span id="msjrazonsocial"></span>
                 </div>
 
@@ -102,13 +103,13 @@
             <div class="col-md-12">
                 <br />
                 <div class="col-md-4">
-                    <span><label><b>Teléfono:</b></label></span>
+                    <span><label><b>TELEFONO:</b></label></span>
                     <input type="text" class="form-control" id="txtptelefono" placeholder="Ingrese el telefono" required onkeypress="return solonumeros(event)" />
-                    <span id="msjtelefono"></span>
+                    <span id="msjtelefonos"></span>
                 </div>
 
                 <div class="col-md-6">
-                    <span><label><b>Email:</b></label></span>
+                    <span><label><b>EMAIL:</b></label></span>
                     <input type="text" class="form-control" id="txtpemail" placeholder="Ingrese el email" required />
                     <span id="msjemail"></span>
                 </div>
@@ -118,7 +119,7 @@
             <div class="col-md-12">
                 <br />
                 <div class="col-md-8">
-                    <span><label><b>Dirección:</b></label></span>
+                    <span><label><b>DIRECCION:</b></label></span>
                     <input type="text" class="form-control" id="txtpdireccion" placeholder="Ingrese la direccion" />
                     <span id="msjdireccion"></span>
                 </div>
@@ -126,13 +127,68 @@
 
             <div class="col-md-12">
                 <br />
-                <div class="col-md-12">                    
+                <div class="col-md-12">
                     <button type="button" class="btn btn-danger" id="btnvolver"> <i class=" fa fa-reply"></i> Volver</button>
                     <button type="button" class="btn btn-success " id="btnregistrar"> <i class=" fa fa-floppy-o"></i> Registrar</button>
                 </div>
             </div>
         </div>
 
+        <div class="diveditprovedor">
+
+            <div class="col-md-12">
+
+                <input type="hidden" class="form-control" id="idprov" />
+
+                <div class="col-md-4">
+                    <span><label><b>RUC:</b></label></span>
+                    <input type="text" class="form-control" id="txteditpruc" placeholder="Ingrese el ruc" required onkeypress="return solonumeros(event)" />
+                    <span id="msjeditruc"></span>
+                </div>
+
+                <div class="col-md-8">
+                    <span><label><b>RAZON SOCIAL:</b></label></span>
+                    <input type="text" class="form-control" id="txteditprazonsocial" placeholder="Ingrese la razon social" required />
+                    <span id="msjeditrazonsocial"></span>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-4">
+                    <span><label><b>TELEFONO:</b></label></span>
+                    <input type="text" class="form-control" id="txteditptelefono" placeholder="Ingrese el telefono" required onkeypress="return solonumeros(event)" />
+                    <span id="msjedittelefonos"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <span><label><b>EMAIL:</b></label></span>
+                    <input type="text" class="form-control" id="txteditpemail" placeholder="Ingrese el email" required />
+                    <span id="msjeditemail"></span>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-8">
+                    <span><label><b>DIRECCION:</b></label></span>
+                    <input type="text" class="form-control" id="txteditpdireccion" placeholder="Ingrese la direccion" />
+                    <span id="msjeditdireccion"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-danger" id="btneditvolver"> <i class=" fa fa-reply"></i> Volver</button>
+                    <button type="button" class="btn btn-success " id="btneditar"> <i class=" fa fa-floppy-o"></i> Editar</button>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 

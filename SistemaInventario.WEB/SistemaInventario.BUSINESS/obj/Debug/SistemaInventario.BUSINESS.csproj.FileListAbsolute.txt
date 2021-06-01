@@ -11,3 +11,16 @@ C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\ob
 C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.csproj.CopyComplete
 C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.dll
 C:\Users\César\source\repos\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.pdb
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.BUSINESS.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.BUSINESS.pdb
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\Newtonsoft.Json.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.CLIENTS.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.ENTITY.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.CLIENTS.pdb
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\SistemaInventario.ENTITY.pdb
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\bin\Debug\Newtonsoft.Json.xml
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.csprojAssemblyReference.cache
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.csproj.CoreCompileInputs.cache
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.csproj.CopyComplete
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.dll
+D:\Git\ProyectoInventario\SistemaInventario.WEB\SistemaInventario.BUSINESS\obj\Debug\SistemaInventario.BUSINESS.pdb
