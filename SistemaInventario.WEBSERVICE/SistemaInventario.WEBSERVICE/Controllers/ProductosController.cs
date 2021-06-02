@@ -70,41 +70,39 @@ namespace SistemaInventario.WEBSERVICE.Controllers
                 throw ex;
             }
         }
-
-        /*
+        
         [HttpPost]
         [Route("listarProductos")]
         public IHttpActionResult listarProductos(ENProductos paramss)
         {
             try
             {
-                var rpt = daproduc.listarProductos(paramss);
+                var rpt = daProductos.listarProductos(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
+        
         [HttpPost]
         [Route("buscarProducto")]
         public IHttpActionResult buscarProducto(ENProductos paramss)
         {
             try
             {
-                var rpt = daproduc.buscarProducto(paramss);
+                var rpt = daProductos.buscarProducto(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-
+        /*
         [HttpPost]
         [Route("buscarProductodepart")]
         public IHttpActionResult buscarProductodepart(ENProductos paramss)

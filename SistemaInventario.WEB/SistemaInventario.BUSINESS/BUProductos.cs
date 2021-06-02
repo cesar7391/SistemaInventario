@@ -54,8 +54,7 @@ namespace SistemaInventario.BUSINESS
                 throw ex;
             }
         }
-
-        /*
+        
         public List<ResponseProductos> listarProductos(ENProductos paramss, string token)
         {
             try
@@ -68,8 +67,7 @@ namespace SistemaInventario.BUSINESS
                 throw ex;
             }
         }
-
-
+        
         public List<ResponseProductos> buscarProducto(ENProductos paramss, string token)
         {
             try
@@ -78,12 +76,11 @@ namespace SistemaInventario.BUSINESS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-
+        /*
         public List<ResponseProductos> buscarProductodepart(ENProductos paramss, string token)
         {
             try

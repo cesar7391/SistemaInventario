@@ -36,12 +36,15 @@
 
             <div class="col-md-12">
                 <div class="col-md-4">
-                    <input type="text" class="form-control" id="txtbuscador" placeholder="Buscar producto" />
+                    <input type="text" class="form-control" id="txtbuscadorp" placeholder="Buscar producto" />
                 </div>
 
                 <div class="col-md-4">
                     <select class="form-control" id="sldepartbuscar">
-                        <option value="0"> -Todos los departamentos- </option>
+                        @foreach (var itm in Model.listaDepartamentos)
+                        {
+                            <option value="@itm.iddepart">@itm.depart</option>
+                        }
                     </select>
                 </div>
 
@@ -54,26 +57,84 @@
             </div>
 
             <div class="col-md-12">
-
                 <br />
-                <table class="table table-condensed table-bordered table-hover dt-reponsive tab">
+
+                <table class="table table-condensed table-bordered table-hover dt-responsive tab" id="tblproduct">
                     <thead>
                         <tr>
+                            <th class="ocultar"></th>
                             <th></th>
                             <th>Tipo</th>
-                            <th>Codigo</th>
-                            <th>Descrip.</th>
-                            <th>T. prod</th>
-                            <th>Depart</th>
+                            <th>Cód.</th>
+                            <th>Desc.</th>
+                            <th>Tipo P.</th>
+                            <th>Depart.</th>
                             <th>Costo</th>
                             <th>Venta</th>
                             <th>Mayoreo</th>
-                            <th>stock</th>
-                            <th>F. Venci</th>
+                            <th>Stock</th>
+                            <th>Fech.V.</th>
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="bdlistproduct">
+                        @foreach (var item in Model.listaProductos)
+                        {
+                            <tr>
+                                <td class="ocultar" id="row_@item.row">@item.idproducto</td>
+                                <td><input type="checkbox" id="cbox_@item.row" /></td>
+
+                                <td>@item.tipo</td>
+                                <td>@item.codbarra</td>
+                                <td>@item.desc</td>
+                                <td>@item.tproduct</td>
+                                <td>@item.depart</td>
+                                <td>@item.pcosto</td>
+                                <td>@item.pventa</td>
+                                <td>@item.pmayoreo</td>
+
+                                @if (item.minexisten < item.existen)
+                                {
+                                    <td style="color:#004501">@item.existen</td>
+                                }
+                                else
+                                {
+                                    if (item.existen == 0)
+                                    {
+                                        <td style="color:#ff0000">@item.existen</td>
+                                    }
+                                    else
+                                    {
+                                        if (item.minexisten >= item.existen)
+                                        {
+                                            <td style="color:#ff6a00">@item.existen</td>
+                                        }
+                                    }
+                                }
+
+                                <td>@item.fvenci</td>
+
+                                @if (item.status == 1)
+                                {
+                                    <td><span style="background:#004501; color:#fff">Activo</span></td>
+                                }
+                                else
+                                {
+                                    if (item.status == 0)
+                                    {
+                                        <td><span style="background:#ff0000; color:#fff">Desactivado</span></td>
+                                    }
+                                    else
+                                    {
+                                        if (item.status == 2)
+                                        {
+                                            <td><span style="background:#ff6a00; color:#fff">Vencido</span></td>
+                                        }
+                                    }
+                                }
+                            </tr>
+                        }
+
                     </tbody>
                 </table>
 
@@ -185,7 +246,7 @@
                 <div class="col-md-5">
                     <div class="input-group">
                         <span class="input-group-addon">Departamentos</span>
-                        <select class="form-control" id="sldepart">
+                        <select class="form-control selectpicker" id="sldepart" style="width:230px;">
                             <option value="0"> - Seleccione un departamento -</option>
                             @foreach (var itm in Model.listaDepartamentos)
                             {
@@ -245,3 +306,4 @@
 
 <script type="text/javascript" src="~/Scripts/app/productos.js"></script>
 <script type="text/javascript" src="~/Scripts/js/validaciones.js"></script>
+

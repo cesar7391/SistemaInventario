@@ -15,7 +15,6 @@ namespace SistemaInventario.Models
         public ResponseRegistroEmpresa msjActivarCuenta { get; set; }
 
         //********************************* EMPLEADOS
-
         public List<ResponseEmpleados> listaEmpleados { get; set; }
         public List<ResponseEmpleados> listaCargos { get; set; }
 
@@ -24,5 +23,11 @@ namespace SistemaInventario.Models
 
         //********************************* DEPARTAMENTOS
         public List<ResponseDepartamentos> listaDepartamentos { get; set; }
+
+        //********************************* PRODUCTOS
+        public List<ResponseProductos> listaProductos { get; set; }
+
+        //********************************* BUSCAR PRODUCTOS
+        public List<ResponseProductos> listaBuscarP { get; set; }
     }
 }

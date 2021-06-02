@@ -31,10 +31,15 @@ namespace SistemaInventario.Controllers
 
                 if (session.productos == 1 | session.cargo == "superadmin")
                 {
-                    ENDepartamentos paramss = new ENDepartamentos();
+                    ENDepartamentos paramssDepartamento = new ENDepartamentos();
+                    ENProductos paramssProducto = new ENProductos();
                     //Debe enviarse el token para entrar a la API
                     var token = session.responsetoken;
-                    model.listaDepartamentos = buProductos.listarDepartamentos(paramss, token);
+                    paramssProducto.rucempresa = session.ruc;
+
+                    model.listaDepartamentos = buProductos.listarDepartamentos(paramssDepartamento, token);
+                    model.listaProductos = buProductos.listarProductos(paramssProducto, token);
+
                     return View(model);
                 }
                 else
@@ -113,8 +118,7 @@ namespace SistemaInventario.Controllers
             var rpt = buProductos.guardarProducto(paramss, token);
             return Json(new { dt = rpt });
         }
-
-        /*
+        
         [HttpPost]
         public ActionResult buscarProducto(ENProductos paramss)
         {
@@ -122,12 +126,11 @@ namespace SistemaInventario.Controllers
             var token = session.responsetoken;
             paramss.rucempresa = session.ruc;
 
-
-            model.buscarProduct = buproduc.buscarProducto(paramss, token);
-            return Json(new { dt = model.buscarProduct, total = model.buscarProduct.Count() });
+            model.listaBuscarP = buProductos.buscarProducto(paramss, token);
+            return Json(new { dt = model.listaBuscarP, total = 10 });
         }
 
-
+        /*
         [HttpPost]
         public ActionResult buscarProductodepart(ENProductos paramss)
         {

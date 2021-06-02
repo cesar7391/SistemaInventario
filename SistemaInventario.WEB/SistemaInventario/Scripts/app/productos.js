@@ -4,10 +4,11 @@ $(document).ready(function () {
 
     document.getElementById("txtapartir").disabled = true;
 
-    /*    
-    document.getElementById("btncatalogo").disabled = true;
     $("#sldepartbuscar").select2();
     $(".selectpicker").select2();
+    /*    
+    document.getElementById("btncatalogo").disabled = true;    
+    
     $(".ocultar").hide();
     */
 })
@@ -236,10 +237,6 @@ $("#txtapartir").keyup(function () {
     }
 })
 
-/*
- * GUARDAR PRODUCTO
- */
-
 $("#btnguardar").on("click", function () {
 
     let tipo = 0;
@@ -458,3 +455,168 @@ $("#sldepart").keyup(function () {
 $("#txtexist").keyup(function () {
     $("#txtexist").css("border-color", "BLUE");
 })
+
+$("#txtbuscadorp").keyup(function () {
+
+    let buscar = $("#txtbuscadorp").val();
+    var params = new Object();
+    params.buscarp = buscar;
+    Post("Productos/buscarProducto", params).done(function (datos) {
+
+        if (datos.dt != null) {
+            //Limpia la tabla y recorre
+            $("#bdlistproduct").empty();
+
+            for (var i = 0; i < datos.total; i++) {
+
+                $("#bdlistproduct").append(
+                    '<tr>' +
+                    '<td id="row_' + datos.dt[i].row + '" >' + datos.dt[i].idproducto + '</td>' +
+                    '<td><input type="checkbox" id="cbox_' + datos.dt[i].row + '" /></td>' +
+                    '<td>' + datos.dt[i].tipo + '</td>' +
+                    '<td>' + datos.dt[i].codbarra + '</td>' +
+                    '<td>' + datos.dt[i].desc + '</td>' +
+                    '<td>' + datos.dt[i].tproduct + '</td>' +
+                    '<td>' + datos.dt[i].depart + '</td>' +
+                    '<td>' + datos.dt[i].pcosto + '</td>' +
+                    '<td>' + datos.dt[i].pventa + '</td>' +
+                    '<td>' + datos.dt[i].pmayoreo + '</td>' +
+
+                    ((datos.dt[i].minexisten < datos.dt[i].existen) ? '<td style="color:#004501">' + datos.dt[i].existen + '</td>' :
+                        (datos.dt[i].existen == 0) ? '<td style="color:#ff0000">' + datos.dt[i].existen + '</td>' :
+                            (datos.dt[i].minexisten >= datos.dt[i].existen) ? '<td style="color:#ff6a00">' + datos.dt[i].existen + '</td>' : '') +
+
+                    '<td>' + datos.dt[i].fvenci + '</td>' +
+
+                    ((datos.dt[i].status == 1) ? '<td><span style="background:#004501; color:#fff">Activo</span></td>' :
+                        (datos.dt[i].status == 0) ? '<td><span style="background:#ff0000; color:#fff">Desactivado</span></td>' :
+                            (datos.dt[i].status == 2) ? '<td><span style="background:#ff6a00; color:#fff">Vencido</span></td>' : '') +
+
+                    '</tr>')
+            }
+        } 
+    })
+})
+
+$("#btnvolver").on("click", function () {
+    window.location = fnBaseURLWeb("Productos/Productos");
+})
+
+/*
+$("#sldepartbuscar").change(function () {
+    let slbuscar = $("#sldepartbuscar").val();
+
+    var params = new Object();
+    params.slbuscar = slbuscar;
+    Post("Productos/buscarProductodepart", params).done(function (datos) {
+
+        if (datos.dt != null) {
+            $("#bdlistproduct").empty();
+            for (var i = 0; i < datos.total; i++) {
+
+                $("#bdlistproduct").append('<tr>' +
+                    '<td id="row_' + datos.dt[i].row + '" >' + datos.dt[i].idproducto + '</td>' +
+                    '<td><input type="checkbox" id="cbox_' + datos.dt[i].row + '" /></td>' +
+                    '<td>' + datos.dt[i].tipo + '</td>' +
+                    '<td>' + datos.dt[i].codbarra + '</td>' +
+                    '<td>' + datos.dt[i].desc + '</td>' +
+                    '<td>' + datos.dt[i].tproduct + '</td>' +
+                    '<td>' + datos.dt[i].depart + '</td>' +
+                    '<td>' + datos.dt[i].pcosto + '</td>' +
+                    '<td>' + datos.dt[i].pventa + '</td>' +
+                    '<td>' + datos.dt[i].pmayoreo + '</td>' +
+
+                    ((datos.dt[i].minexisten < datos.dt[i].existen) ? '<td style="color:#004501">' + datos.dt[i].existen + '</td>' :
+                        (datos.dt[i].existen == 0) ? '<td style="color:#ff0000">' + datos.dt[i].existen + '</td>' :
+                            (datos.dt[i].minexisten >= datos.dt[i].existen) ? '<td style="color:#ff6a00">' + datos.dt[i].existen + '</td>' : '') +
+
+                    '<td>' + datos.dt[i].fvenci + '</td>' +
+
+                    ((datos.dt[i].status == 1) ? '<td><span style="background:#004501; color:#fff">Activo</span></td>' :
+                        (datos.dt[i].status == 0) ? '<td><span style="background:#ff0000; color:#fff">Desactivado</span></td>' :
+                            (datos.dt[i].status == 2) ? '<td><span style="background:#ff6a00; color:#fff">Vencido</span></td>' : '') +
+
+                    '</tr>')
+            }
+        }
+
+    })
+
+})
+
+$("#btneliminar").on("click", function () {
+
+
+    swal({
+        title: '¿Esta seguro de eliminar el producto?',
+        text: '¡Si no lo esta puede cancelar la accion!',
+        type: 'warning',
+        showConfirmButton: true,
+        showCancelButton: true,
+        ConfirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        CancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, Eliminar',
+        closeOnConfirm: false
+    }, function (isConfirm) {
+        //debugger;
+            if (isConfirm) {
+
+
+                let tabla = $('.tab').DataTable();
+                let data = tabla.rows().data();
+
+                let hayseleccion = 0;
+                let datos = "";
+
+                for (var i = 1; i <= data.length; i++) {
+                    if ($('#cbox_' + i).is(":checked")) {
+                        datos = datos + $.trim($("#row_" + i).text()) + "|";
+                        hayseleccion = 1;
+                    }
+                }
+
+                if (hayseleccion == 1) {
+
+                    let params = new Object();
+                    params.datos = datos;
+                    Post("Productos/eliminarProducto", params).done(function (datos) {
+
+                        if (datos.dt.response == "ok") {
+
+                            swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: "Se elimino el producto correctamente",
+                                text: 'Producto eliminado',
+                                showConfirmButton: true,
+                                timer: 60000,
+                                confirmButtonText: 'Cerrar'
+                            }, function () {
+                                    window.location = fnBaseURLWeb("Productos/Productos");
+                            })
+
+
+                        }
+
+                    })
+
+
+                } else {
+                    swal({
+                        position: 'top-end',
+                        type: 'error',
+                        title: 'No a seleccionado ningun producto',
+                        text: 'debe seleccionar almenos un producto para eliminarlo.',
+                        showConfirmButton: true,
+                        timer: 60000,
+                        confirmButtonText: 'Cerrar'
+                    })
+                }
+
+        }
+
+    })
+
+})
+*/

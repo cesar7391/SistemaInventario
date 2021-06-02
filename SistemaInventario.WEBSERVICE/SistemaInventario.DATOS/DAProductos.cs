@@ -152,8 +152,7 @@ namespace SistemaInventario.DATOS
                 throw ex;
             }
         }
-
-        /*
+        
         public List<ResponseProductos> listarProductos(ENProductos paramss)
         {
             try
@@ -167,8 +166,6 @@ namespace SistemaInventario.DATOS
                     SqlCommand cmd = new SqlCommand("usp_listarProductos", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@rucempresa", paramss.rucempresa));
-
-
 
                     using (SqlDataReader rdr = cmd.ExecuteReader())
                     {
@@ -197,11 +194,11 @@ namespace SistemaInventario.DATOS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
+        
         public List<ResponseProductos> buscarProducto(ENProductos paramss)
         {
             try
@@ -226,8 +223,6 @@ namespace SistemaInventario.DATOS
 
                     cmd.Parameters.Add(new SqlParameter("@rucempresa", paramss.rucempresa));
 
-
-
                     using (SqlDataReader rdr = cmd.ExecuteReader())
                     {
                         while (rdr.Read())
@@ -255,11 +250,11 @@ namespace SistemaInventario.DATOS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
+        /*
         public List<ResponseProductos> buscarProductodepart(ENProductos paramss)
         {
             try
