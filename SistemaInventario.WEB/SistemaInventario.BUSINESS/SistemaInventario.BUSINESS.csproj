@@ -47,6 +47,7 @@
     <Compile Include="BUEmpleados.cs" />
     <Compile Include="BULogin.cs" />
     <Compile Include="BUPais.cs" />
+    <Compile Include="BUProductos.cs" />
     <Compile Include="BUProveedores.cs" />
     <Compile Include="BURegistroEmpresa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

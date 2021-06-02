@@ -45,6 +45,7 @@
     <Compile Include="DAEmpleados.cs" />
     <Compile Include="DALogin.cs" />
     <Compile Include="DAPaises.cs" />
+    <Compile Include="DAProductos.cs" />
     <Compile Include="DAProveedores.cs" />
     <Compile Include="DARegistroEmpresa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

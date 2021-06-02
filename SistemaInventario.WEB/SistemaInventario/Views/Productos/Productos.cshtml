@@ -1,4 +1,5 @@
-﻿
+﻿@model modelList
+@using SistemaInventario.Models
 @{
     ViewBag.Title = "Productos";
 }
@@ -39,7 +40,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <select class="form-control" id="sldepart">
+                    <select class="form-control" id="sldepartbuscar">
                         <option value="0"> -Todos los departamentos- </option>
                     </select>
                 </div>
@@ -129,7 +130,7 @@
                     <div class="input-group">
                         <span class="input-group-addon">Precio de adquisición: $</span>
                         <!--<span class="input-group-addon">$</span>-->
-                        <input type="text" class="form-control" placeholder="0.00" id="txtpcosto"/>
+                        <input type="text" class="form-control" placeholder="0.00" id="txtpcosto" onkeypress="return Decimal(this, event)"/>
                     </div>
                 </div>
             </div>
@@ -139,7 +140,7 @@
                 <div class="col-md-3">
                     <div class="input-group">
                         <span class="input-group-addon">Ganancia</span>
-                        <input type="number" class="form-control" id="txtganancia"/>
+                        <input type="number" class="form-control" id="txtganancia" placeholder="0" onkeypress="return Decimal(this, event)"/>
                         <span class="input-group-addon">%</span>
                     </div>
                 </div>
@@ -151,13 +152,14 @@
                     <div class="input-group">
                         <span class="input-group-addon"><span id="lblpvenser"></span></span>
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control" placeholder="0.00" disabled id="txtpvenser"/>
+                        <input type="text" class="form-control" placeholder="0.00" disabled id="txtpvenser" onkeypress="return Decimal(this, event)"/>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                @*<div class="col-md-3">
                     <input type="checkbox" id="chkimpuestos"/> Impuestos
-                </div>
+                </div>*@
+
             </div>
 
             <div class="col-md-12">
@@ -166,14 +168,14 @@
                     <div class="input-group">
                         <span class="input-group-addon">Precio Mayoreo: $</span>
                         <!--<span class="input-group-addon">$</span>-->
-                        <input type="text" class="form-control" placeholder="0.00" id="txtpmayoreo" />
+                        <input type="text" class="form-control" placeholder="0.00" id="txtpmayoreo" onkeypress="return Decimal(this, event)" />
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="input-group">
                         <span class="input-group-addon">A partir de: </span>
-                        <input type="number" class="form-control" placeholder="0.00" min="2" id="txtapartir" />
+                        <input type="text" class="form-control" placeholder="0.00" min="2" id="txtapartir" onkeypress="return solonumeros(event)" />
                     </div>
                 </div>
             </div>
@@ -185,6 +187,10 @@
                         <span class="input-group-addon">Departamentos</span>
                         <select class="form-control" id="sldepart">
                             <option value="0"> - Seleccione un departamento -</option>
+                            @foreach (var itm in Model.listaDepartamentos)
+                            {
+                                <option value="@itm.iddepart">@itm.depart</option>
+                            }
                         </select>
                     </div>
                 </div>
@@ -226,8 +232,8 @@
             <div class="col-md-12">
                 <br/>
                 <div class="col-md-4">
-                    <button class="btn btn-default"><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
-                    <button class="btn btn-default"><img src="~/Content/img/imagenes/guardar.png" alt="Alternate Text" /> Guardar</button>
+                    <button class="btn btn-default" id="btnvolver"><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
+                    <button class="btn btn-default" id="btnguardar"><img src="~/Content/img/imagenes/guardar.png" alt="Alternate Text" /> Guardar</button>
                 </div>
             </div>
 

@@ -20,7 +20,9 @@ namespace SistemaInventario.Models
         public List<ResponseEmpleados> listaCargos { get; set; }
 
         //********************************* PROVEEDORES
-
         public List<ResponseProveedores> listaProveedores { get; set; }
+
+        //********************************* DEPARTAMENTOS
+        public List<ResponseDepartamentos> listaDepartamentos { get; set; }
     }
 }

@@ -41,16 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parametros\ENDepartamentos.cs" />
     <Compile Include="Parametros\ENEmpleados.cs" />
     <Compile Include="Parametros\ENLogin.cs" />
+    <Compile Include="Parametros\ENProductos.cs" />
     <Compile Include="Parametros\ENProveedores.cs" />
     <Compile Include="Parametros\ENRegistroEmpresa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response\ResponseDepartamentos.cs" />
     <Compile Include="Response\ResponseEmpleados.cs" />
     <Compile Include="Response\ResponseLogin.cs" />
     <Compile Include="Response\ResponseMoneda.cs" />
     <Compile Include="Response\ResponsePais.cs" />
     <Compile Include="Response\ResponsePImpuesto.cs" />
+    <Compile Include="Response\ResponseProductos.cs" />
     <Compile Include="Response\ResponseProveedores.cs" />
     <Compile Include="Response\ResponseRegistroEmpresa.cs" />
     <Compile Include="Response\ResponseTImpuesto.cs" />

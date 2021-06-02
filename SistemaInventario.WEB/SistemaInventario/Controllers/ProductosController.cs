@@ -1,4 +1,7 @@
-﻿using SistemaInventario.Helpers;
+﻿using SistemaInventario.BUSINESS;
+using SistemaInventario.ENTITY.Parametros;
+using SistemaInventario.Helpers;
+using SistemaInventario.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +12,16 @@ namespace SistemaInventario.Controllers
 {
     public class ProductosController : Controller
     {
+        private BUProductos buProductos;
+        private modelList model;
         // GET: Productos
+
+        public ProductosController()
+        {
+            buProductos = new BUProductos();
+            model = new modelList();
+        }
+
         public ActionResult Productos()
         {
             var session = Session.GetCurrentUser();
@@ -19,7 +31,11 @@ namespace SistemaInventario.Controllers
 
                 if (session.productos == 1 | session.cargo == "superadmin")
                 {
-                    return View();
+                    ENDepartamentos paramss = new ENDepartamentos();
+                    //Debe enviarse el token para entrar a la API
+                    var token = session.responsetoken;
+                    model.listaDepartamentos = buProductos.listarDepartamentos(paramss, token);
+                    return View(model);
                 }
                 else
                 {
@@ -57,5 +73,155 @@ namespace SistemaInventario.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult calcularPventaSinImpuestos(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+
+
+            var rpt = buProductos.calcularPventaSinImpuestos(paramss, token);
+            return Json(new { dt = rpt });
+        }
+
+        
+        [HttpPost]
+        public ActionResult calculoPrecios(ENProductos paramss)
+        {
+            //Es un método directo que trabaja con los valores obtenidos
+            if (paramss.pmayoreo > paramss.pventa)
+            {
+                var rpt = "error";
+                return Json(new { dt = rpt });
+            }
+            else
+            {
+                var rpt = "ok";
+                return Json(new { dt = rpt });
+            }
+
+        }        
+
+        [HttpPost]
+        public ActionResult guardarProducto(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+            paramss.rucempresa = session.ruc;
+
+
+            var rpt = buProductos.guardarProducto(paramss, token);
+            return Json(new { dt = rpt });
+        }
+
+        /*
+        [HttpPost]
+        public ActionResult buscarProducto(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+            paramss.rucempresa = session.ruc;
+
+
+            model.buscarProduct = buproduc.buscarProducto(paramss, token);
+            return Json(new { dt = model.buscarProduct, total = model.buscarProduct.Count() });
+        }
+
+
+        [HttpPost]
+        public ActionResult buscarProductodepart(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+            paramss.rucempresa = session.ruc;
+
+
+            model.buscarProductdepart = buproduc.buscarProductodepart(paramss, token);
+            return Json(new { dt = model.buscarProductdepart, total = model.buscarProductdepart.Count() });
+        }
+
+
+
+        [HttpPost]
+        public ActionResult eliminarProducto(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+            paramss.rucempresa = session.ruc;
+
+
+            var rpt = buproduc.eliminarProducto(paramss, token);
+            return Json(new { dt = rpt });
+        }
+
+
+        [HttpPost]
+        public ActionResult obtEditarProducto(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+            paramss.rucempresa = session.ruc;
+
+            ResponseProductos rpt = new ResponseProductos();
+
+            string idproductos = paramss.datos;
+            String[] strlist = idproductos.Split('|');
+            var count = strlist.Count() - 1;
+
+            if (count == 1)
+            {
+                rpt = buproduc.obtEditarProducto(paramss, token);
+                return Json(new { dt = rpt });
+            }
+            else
+            {
+                rpt.response = "Error";
+                return Json(new { dt = rpt });
+            }
+
+
+        }
+
+
+        [HttpPost]
+        public ActionResult editarProduct(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+            paramss.rucempresa = session.ruc;
+
+
+            var rpt = buproduc.editarProduct(paramss, token);
+            return Json(new { dt = rpt });
+        }
+
+
+        [HttpPost]
+        public JsonResult obtlistaProducto(string letra)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+
+            ENProductos paramss = new ENProductos();
+            paramss.rucempresa = session.ruc;
+            paramss.letra = letra;
+            return Json(buproduc.obtlistaProducto(paramss, token), JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public JsonResult obtlistaProducto_cod(ENProductos paramss)
+        {
+            var session = Session.GetCurrentUser();
+            var token = session.responsetoken;
+            paramss.rucempresa = session.ruc;
+            paramss.letra = paramss.codbarra;
+
+            var rpt = buproduc.obtlistaProducto(paramss, token);
+            return Json(new { dt = rpt });
+
+
+        }
+        */
     }
 }
