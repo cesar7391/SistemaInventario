@@ -213,13 +213,9 @@ namespace SistemaInventario.DATOS
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     if (paramss.buscarp == null)
-                    {
                         cmd.Parameters.Add(new SqlParameter("@letra", ""));
-                    }
                     else
-                    {
                         cmd.Parameters.Add(new SqlParameter("@letra", paramss.buscarp));
-                    }
 
                     cmd.Parameters.Add(new SqlParameter("@rucempresa", paramss.rucempresa));
 
@@ -254,8 +250,8 @@ namespace SistemaInventario.DATOS
             }
         }
 
-        /*
-        public List<ResponseProductos> buscarProductodepart(ENProductos paramss)
+        
+        public List<ResponseProductos> buscarProductoDepartamento(ENProductos paramss)
         {
             try
             {
@@ -265,14 +261,11 @@ namespace SistemaInventario.DATOS
                 using (SqlConnection conn = new SqlConnection(cs))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("usp_buscarProductodepart", conn);
+                    SqlCommand cmd = new SqlCommand("usp_buscarProductoDepartamento", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter("@iddepartamento", paramss.slbuscar));
-
                     cmd.Parameters.Add(new SqlParameter("@rucempresa", paramss.rucempresa));
-
-
 
                     using (SqlDataReader rdr = cmd.ExecuteReader())
                     {
@@ -301,18 +294,20 @@ namespace SistemaInventario.DATOS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
+        
         public ResponseProductos eliminarProducto(ENProductos paramss)
         {
             try
             {
                 string idproductos = paramss.datos;
-                String[] strlist = idproductos.Split('|');
-                var count = strlist.Count() - 1;
+                //Se separan los IDs para eliminar
+                String[] arregloID = idproductos.Split('|');
+                //No se toma en cuenta el indice 0
+                var count = arregloID.Count() - 1;
 
                 string cs = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
                 var lista = new List<ResponseProductos>();
@@ -321,11 +316,13 @@ namespace SistemaInventario.DATOS
                 {
                     conn.Open();
 
+                    //Se inicia un recorrido para recorrer la strlist
                     for (int i = 0; i < count; i++)
                     {
                         SqlCommand cmd = new SqlCommand("usp_eliminarProducto", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add(new SqlParameter("@idproducto", strlist[i]));
+                        //Se manda el id de la posición actual para borrar
+                        cmd.Parameters.Add(new SqlParameter("@idproducto", arregloID[i]));
 
                         using (SqlDataReader rdr = cmd.ExecuteReader())
                         {
@@ -337,19 +334,16 @@ namespace SistemaInventario.DATOS
                             }
                         }
                     }
-
-
                 }
                 return lista.FirstOrDefault();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
-        public ResponseProductos tmoneda(ENProductos paramss)
+        
+        public ResponseProductos tipoMoneda(ENProductos paramss)
         {
             try
             {
@@ -362,7 +356,6 @@ namespace SistemaInventario.DATOS
                     SqlCommand cmd = new SqlCommand("usp_obtTipoMoneda", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@rucempresa", paramss.rucempresa));
-
 
                     using (SqlDataReader rdr = cmd.ExecuteReader())
                     {
@@ -378,11 +371,9 @@ namespace SistemaInventario.DATOS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-        }
-
+        } 
         public ResponseProductos obtEditarProducto(ENProductos paramss)
         {
             try
@@ -429,18 +420,16 @@ namespace SistemaInventario.DATOS
                             }
                         }
                     }
-
-
                 }
                 return lista.FirstOrDefault();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
+        /*
         public ResponseProductos editarProduct(ENProductos paramss)
         {
             try

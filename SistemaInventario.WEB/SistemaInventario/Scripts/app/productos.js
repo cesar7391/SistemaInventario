@@ -3,14 +3,11 @@ $(document).ready(function () {
     $("#lblprin").html("CATÁLOGO DE PRODUCTOS");
 
     document.getElementById("txtapartir").disabled = true;
+    document.getElementById("btncatalogo").disabled = true;
 
     $("#sldepartbuscar").select2();
-    $(".selectpicker").select2();
-    /*    
-    document.getElementById("btncatalogo").disabled = true;    
-    
-    $(".ocultar").hide();
-    */
+    $(".selectpicker").select2();    
+    //$(".ocultar").hide();
 })
 
 $("#btnnewp").on("click", function () {
@@ -502,18 +499,16 @@ $("#btnvolver").on("click", function () {
     window.location = fnBaseURLWeb("Productos/Productos");
 })
 
-/*
 $("#sldepartbuscar").change(function () {
+    //Se obtiene el valor del select
     let slbuscar = $("#sldepartbuscar").val();
 
     var params = new Object();
     params.slbuscar = slbuscar;
-    Post("Productos/buscarProductodepart", params).done(function (datos) {
-
+    Post("Productos/buscarProductoDepartamento", params).done(function (datos) {
         if (datos.dt != null) {
             $("#bdlistproduct").empty();
             for (var i = 0; i < datos.total; i++) {
-
                 $("#bdlistproduct").append('<tr>' +
                     '<td id="row_' + datos.dt[i].row + '" >' + datos.dt[i].idproducto + '</td>' +
                     '<td><input type="checkbox" id="cbox_' + datos.dt[i].row + '" /></td>' +
@@ -545,11 +540,9 @@ $("#sldepartbuscar").change(function () {
 })
 
 $("#btneliminar").on("click", function () {
-
-
     swal({
-        title: '¿Esta seguro de eliminar el producto?',
-        text: '¡Si no lo esta puede cancelar la accion!',
+        title: '¿Está seguro de eliminar el(los) producto(s)?',
+        text: 'Si no lo está, puede cancelar la acción',
         type: 'warning',
         showConfirmButton: true,
         showCancelButton: true,
@@ -559,64 +552,168 @@ $("#btneliminar").on("click", function () {
         confirmButtonText: 'Si, Eliminar',
         closeOnConfirm: false
     }, function (isConfirm) {
-        //debugger;
             if (isConfirm) {
-
-
                 let tabla = $('.tab').DataTable();
                 let data = tabla.rows().data();
-
                 let hayseleccion = 0;
                 let datos = "";
 
                 for (var i = 1; i <= data.length; i++) {
+                    //Se obtienen las filas selccionadas y se guardan en datos, separados por "|"
                     if ($('#cbox_' + i).is(":checked")) {
                         datos = datos + $.trim($("#row_" + i).text()) + "|";
+                        //1|2|3|4|5|...
                         hayseleccion = 1;
                     }
                 }
 
                 if (hayseleccion == 1) {
-
                     let params = new Object();
                     params.datos = datos;
                     Post("Productos/eliminarProducto", params).done(function (datos) {
-
                         if (datos.dt.response == "ok") {
-
                             swal({
                                 position: 'top-end',
                                 type: 'success',
-                                title: "Se elimino el producto correctamente",
-                                text: 'Producto eliminado',
+                                title: "Registro(s) eliminado(s) correctamente",
+                                text: 'Producto(s) eliminado(s) de la base de datos',
                                 showConfirmButton: true,
                                 timer: 60000,
                                 confirmButtonText: 'Cerrar'
                             }, function () {
                                     window.location = fnBaseURLWeb("Productos/Productos");
                             })
-
-
                         }
-
                     })
-
-
                 } else {
                     swal({
                         position: 'top-end',
                         type: 'error',
-                        title: 'No a seleccionado ningun producto',
-                        text: 'debe seleccionar almenos un producto para eliminarlo.',
+                        title: 'No ha seleccionado ningún producto',
+                        text: 'Debe seleccionar al menos un producto para eliminarlo.',
                         showConfirmButton: true,
                         timer: 60000,
                         confirmButtonText: 'Cerrar'
                     })
                 }
-
         }
 
     })
-
 })
-*/
+
+$("#btnModificar").on("click", function () {
+
+    let tabla = $('.tab').DataTable();
+    let data = tabla.rows().data();
+    let hayseleccion = 0;
+    let datos = "";
+
+    for (var i = 1; i <= data.length; i++) {
+        if ($('#cbox_' + i).is(":checked")) {
+            datos = datos + $.trim($("#row_" + i).text()) + "|";
+            hayseleccion = 1;
+        }
+    }
+
+    if (hayseleccion == 1) {
+        let params = new Object();
+        params.datos = datos;
+        Post("Productos/obtEditarProducto", params).done(function (datos) {
+
+            if (datos.dt.response != "Error") {
+                $("#lblprin").html("EDITAR PRODUCTO");
+                document.getElementById("diveditproduct").style.display = "block";
+                document.getElementById("divcatalogo").style.display = "none";
+                $("#idproductos").val(datos.dt.idproducto);
+                $("#obtsl").append("<option value=" + datos.dt.iddepartamento + ">" + datos.dt.departamento + "</option>");
+                $("#edittxtiddepartamentos").val(datos.dt.iddepartamento);
+                document.getElementById("edittxtexist").disabled = true;
+                if (datos.dt.tipo1 == 1) {
+
+                    $("#lblmensaje").html("Para modificar el inventario de un producto existente. Hágalo desde el módulo de inventarios.").css("color", "red");
+
+                    document.getElementById('editrdrbien').checked = true;
+                    document.getElementById("editrdrservicio").disabled = true;
+
+                    $("#edittxtcodbarra").val(datos.dt.codbarra);
+                    $("#edittxtdesc").val(datos.dt.desc);
+
+                    if (datos.dt.sevende == 1)
+                        document.getElementById('editrdrunca').checked = true;
+                    else
+                        document.getElementById('editrdrkigra').checked = true;
+
+                    $("#edittxtpcosto").val(datos.dt.pcosto);
+                    $("#edittxtganancia").val(datos.dt.ganancia);
+                    $("#editlblpvenser").html("Precio venta");
+                    $("#edittxtpvenser").val(datos.dt.pventa);
+                    $("#edittxtpmayoreo").val(datos.dt.pmayoreo);
+                    $("#edittxtapartir").val(datos.dt.apartir);
+                    $("#edittxtexist").val(datos.dt.existen);
+                    $("#edittxtstockmin").val(datos.dt.minexisten);
+
+                    if (datos.dt.faplica == 0) {
+                        //debugger;
+                        document.getElementById('editchknoaplica').checked = false;
+                        document.getElementById("edittxtfvenci").value = datos.dt.fvenci;
+                    } else {
+                        document.getElementById('editchknoaplica').checked = true;
+                        $("#edittxtfvenci").val("dd/mm/aaaa");
+                    }
+
+                    document.getElementById("edittxtstockmin").disabled = false;
+                }
+
+                if (datos.dt.tipo1 == 2) {
+                    document.getElementById('editrdrservicio').checked = true;
+                    document.getElementById("editrdrbien").disabled = true;
+
+                    $("#edittxtcodbarra").val(datos.dt.codbarra);
+                    $("#edittxtdesc").val(datos.dt.desc);
+
+                    if (datos.dt.sevende == 1) {
+                        document.getElementById('editrdrunca').checked = true;
+                        document.getElementById('editrdrkigra').disabled = true;
+                    }
+
+                    document.getElementById("rdrkigra").disabled = true;
+                    document.getElementById("rdrkigra").checked = false;
+                    document.getElementById("edittxtpcosto").disabled = true;
+                    document.getElementById("edittxtganancia").disabled = true;
+
+                    $("#editlblpvenser").html("Precio servicio");
+                    $("#edittxtpvenser").val(datos.dt.pventa);
+
+                    document.getElementById("edittxtpvenser").disabled = false;
+                    document.getElementById("edittxtpmayoreo").disabled = true;
+                    document.getElementById("edittxtapartir").disabled = true;
+                    document.getElementById('editchknoaplica').checked = true;
+                    document.getElementById("edittxtfvenci").disabled = true;
+                    document.getElementById("editchknoaplica").disabled = true;
+                    document.getElementById("edittxtcodbarra").disabled = true;
+                    document.getElementById("edittxtstockmin").disabled = true;
+                }
+            } else {
+                swal({
+                    position: 'top-end',
+                    type: 'error',
+                    title: 'Solo puede editar un producto/servicio a la vez',
+                    text: 'No debe seleccionar más de un producto/servicio',
+                    showConfirmButton: true,
+                    timer: 60000,
+                    confirmButtonText: 'Cerrar'
+                })
+            }
+        })
+    } else {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'Seleccione un producto/servicio',
+            text: 'no se ha seleccionado un producto/servicio',
+            showConfirmButton: true,
+            timer: 60000,
+            confirmButtonText: 'Cerrar'
+        })
+    }
+})

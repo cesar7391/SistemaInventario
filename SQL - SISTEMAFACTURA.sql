@@ -322,6 +322,7 @@ insert into dtdepartamentos values('Laptops', 1)
 insert into dtdepartamentos values('Impresoras', 1)
 insert into dtdepartamentos values('Refrescos', 1)
 insert into dtdepartamentos values('Lácteos', 1)
+insert into dtdepartamentos values('Informática', 1)
 */
 --*********************************************** LISTAR DEPARTAMENTO
 /*
@@ -451,7 +452,7 @@ END
 */
 --*********************************************** SP BUSCAR PRODUCTOS
 --
-
+/*
 ALTER PROCEDURE usp_buscarProducto(@letra varchar(200),@rucempresa nchar(20))
 AS
 BEGIN
@@ -477,3 +478,70 @@ BEGIN
 	inner join dtdepartamentos b on a.iddepart = b.iddepartamento
 	WHERE a.codbarra LIKE '%' + @letra + '%' AND a.rucempresa = @rucempresa
 end
+*/
+--*********************************************** SP PARA BUSCAR PRODUCTO POR DEPARTAMENTOS
+/*
+ALTER procedure usp_buscarProductoDepartamento(@iddepartamento int, @rucempresa nchar(20))
+AS
+BEGIN
+	if @iddepartamento <> 0
+	begin
+		select top 30 ROW_NUMBER() OVER(ORDER BY a.idproducto ASC) AS Row, a.idproducto,
+		case when a.tipo = 1 then 'Bien' else 'Servicio' end tipo,
+		case when a.tproduct = 1 then 'Unid/Caja' else 'Kilos/Gramos' end tproduct,
+		a.codbarra ,a.descripcion ,b.departamento ,a.pcosto,
+		a.pventa , a.pmayoreo, a.existencia ,a.minexisten,
+		case when a.faplica = 1 then 'No Aplica' else cast(a.fvenci as nchar) end fvenci,
+		a.status
+		from dtproductos a
+		inner join dtdepartamentos b on a.iddepart = b.iddepartamento
+		where a.iddepart = @iddepartamento AND a.rucempresa = @rucempresa
+	end
+
+	if @iddepartamento = 0
+		begin
+		select top 30 ROW_NUMBER() OVER(ORDER BY a.idproducto ASC) AS Row, a.idproducto,
+		case when a.tipo = 1 then 'Bien' else 'Servicio' end tipo,
+		case when a.tproduct = 1 then 'Unid/Caja' else 'Kilos/Gramos' end tproduct,
+		a.codbarra ,a.descripcion ,b.departamento ,a.pcosto,
+		a.pventa , a.pmayoreo, a.existencia ,a.minexisten,
+		case when a.faplica = 1 then 'No Aplica' else cast(a.fvenci as nchar) end fvenci,
+		a.status
+		from dtproductos a
+		inner join dtdepartamentos b on a.iddepart = b.iddepartamento
+		where a.rucempresa = @rucempresa 
+	end
+end
+*/
+--*********************************************** SP PARA ELIMINAR PRODUCTOS
+/*
+CREATE PROCEDURE usp_eliminarProducto(@idproducto int)
+as
+begin
+	delete dtproductos where idproducto = @idproducto
+select 'ok' response 
+end
+*/
+--*********************************************** SP PARA OBTENER EL TIPO DE MONEDA
+/*
+ALTER procedure usp_obtTipoMoneda(@rucempresa nchar(30))
+AS
+BEGIN
+	select RTRIM(LTRIM(b.Moneda)) Moneda from dtempresa a
+    INNER JOIN dtmoneda b on a.idmoneda = b.idmoneda
+	where a.ruc = @rucempresa
+END
+*/
+--***********************************************
+CREATE procedure usp_obtEditarProducto(@idproducto int)
+AS
+BEGIN
+	select a.idproducto, a.tipo, RTRIM(LTRIM(a.codbarra)) codbarra, RTRIM(LTRIM(a.descripcion)) descripcion
+	,a.tproduct sevende, a.pcosto,a.ganancia,a.pventa, a.pmayoreo, a.apartir, b.iddepartamento, RTRIM(LTRIM(b.departamento))departamento,
+	a.existencia, a.minexisten, RTRIM(LTRIM(cast(a.fvenci as nchar))) fvenci, a.faplica
+	from dtproductos a
+	inner join dtdepartamentos b on a.iddepart = b.iddepartamento   
+	where idproducto = @idproducto
+end
+
+

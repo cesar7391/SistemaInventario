@@ -42,6 +42,7 @@ namespace SistemaInventario.ENTITY.Response
         public int iddepartamento { get; set; }
         public string departamento { get; set; }
 
+        public string tipomoneda { get; set; }
 
         public string precioventa { get; set; }
     }

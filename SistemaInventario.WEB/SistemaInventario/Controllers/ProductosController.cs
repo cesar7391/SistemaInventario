@@ -1,5 +1,6 @@
 ﻿using SistemaInventario.BUSINESS;
 using SistemaInventario.ENTITY.Parametros;
+using SistemaInventario.ENTITY.Response;
 using SistemaInventario.Helpers;
 using SistemaInventario.Models;
 using System;
@@ -39,6 +40,7 @@ namespace SistemaInventario.Controllers
 
                     model.listaDepartamentos = buProductos.listarDepartamentos(paramssDepartamento, token);
                     model.listaProductos = buProductos.listarProductos(paramssProducto, token);
+                    model.tipomoneda = buProductos.tipoMoneda(paramssProducto, token);
 
                     return View(model);
                 }
@@ -129,22 +131,19 @@ namespace SistemaInventario.Controllers
             model.listaBuscarP = buProductos.buscarProducto(paramss, token);
             return Json(new { dt = model.listaBuscarP, total = 10 });
         }
-
-        /*
+        
         [HttpPost]
-        public ActionResult buscarProductodepart(ENProductos paramss)
+        public ActionResult buscarProductoDepartamento(ENProductos paramss)
         {
             var session = Session.GetCurrentUser();
             var token = session.responsetoken;
             paramss.rucempresa = session.ruc;
 
 
-            model.buscarProductdepart = buproduc.buscarProductodepart(paramss, token);
-            return Json(new { dt = model.buscarProductdepart, total = model.buscarProductdepart.Count() });
+            model.listaBuscarPD = buProductos.buscarProductoDepartamento(paramss, token);
+            return Json(new { dt = model.listaBuscarPD, total = model.listaBuscarPD.Count() });
         }
-
-
-
+                
         [HttpPost]
         public ActionResult eliminarProducto(ENProductos paramss)
         {
@@ -152,12 +151,10 @@ namespace SistemaInventario.Controllers
             var token = session.responsetoken;
             paramss.rucempresa = session.ruc;
 
-
-            var rpt = buproduc.eliminarProducto(paramss, token);
+            var rpt = buProductos.eliminarProducto(paramss, token);
             return Json(new { dt = rpt });
         }
-
-
+        
         [HttpPost]
         public ActionResult obtEditarProducto(ENProductos paramss)
         {
@@ -173,7 +170,7 @@ namespace SistemaInventario.Controllers
 
             if (count == 1)
             {
-                rpt = buproduc.obtEditarProducto(paramss, token);
+                rpt = buProductos.obtEditarProducto(paramss, token);
                 return Json(new { dt = rpt });
             }
             else
@@ -181,11 +178,9 @@ namespace SistemaInventario.Controllers
                 rpt.response = "Error";
                 return Json(new { dt = rpt });
             }
-
-
         }
 
-
+        /*
         [HttpPost]
         public ActionResult editarProduct(ENProductos paramss)
         {

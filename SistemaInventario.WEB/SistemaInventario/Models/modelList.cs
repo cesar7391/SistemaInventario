@@ -12,6 +12,7 @@ namespace SistemaInventario.Models
         public List<ResponseMoneda> listMoneda { get; set; }
         public List<ResponseTImpuesto> listTImpuesto { get; set; }
         public List<ResponsePImpuesto> listPImpuesto { get; set; }
+
         public ResponseRegistroEmpresa msjActivarCuenta { get; set; }
 
         //********************************* EMPLEADOS
@@ -29,5 +30,10 @@ namespace SistemaInventario.Models
 
         //********************************* BUSCAR PRODUCTOS
         public List<ResponseProductos> listaBuscarP { get; set; }
+
+        //********************************* BUSCAR PRODUCTOS POR DEPARTAMENTO
+        public List<ResponseProductos> listaBuscarPD { get; set; }
+
+        public ResponseProductos tipomoneda { get; set; }
     }
 }

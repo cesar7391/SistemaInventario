@@ -101,77 +101,69 @@ namespace SistemaInventario.WEBSERVICE.Controllers
                 throw ex;
             }
         }
-
-        /*
+        
         [HttpPost]
-        [Route("buscarProductodepart")]
-        public IHttpActionResult buscarProductodepart(ENProductos paramss)
+        [Route("buscarProductoDepartamento")]
+        public IHttpActionResult buscarProductoDepartamento(ENProductos paramss)
         {
             try
             {
-                var rpt = daproduc.buscarProductodepart(paramss);
+                var rpt = daProductos.buscarProductoDepartamento(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         [Route("eliminarProducto")]
         public IHttpActionResult eliminarProducto(ENProductos paramss)
         {
             try
             {
-                var rpt = daproduc.eliminarProducto(paramss);
+                var rpt = daProductos.eliminarProducto(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
 
 
         [HttpPost]
-        [Route("tmoneda")]
-        public IHttpActionResult tmoneda(ENProductos paramss)
+        [Route("tipoMoneda")]
+        public IHttpActionResult tipoMoneda(ENProductos paramss)
         {
             try
             {
-                var rpt = daproduc.tmoneda(paramss);
+                var rpt = daProductos.tipoMoneda(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         [Route("obtEditarProducto")]
         public IHttpActionResult obtEditarProducto(ENProductos paramss)
         {
             try
             {
-                var rpt = daproduc.obtEditarProducto(paramss);
+                var rpt = daProductos.obtEditarProducto(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-
+        /*
         [HttpPost]
         [Route("editarProduct")]
         public IHttpActionResult editarProduct(ENProductos paramss)
