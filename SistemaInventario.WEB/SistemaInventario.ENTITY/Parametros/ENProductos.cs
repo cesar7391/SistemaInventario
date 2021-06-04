@@ -32,6 +32,7 @@ namespace SistemaInventario.ENTITY.Parametros
         public string buscarp { get; set; }
         public int slbuscar { get; set; }
 
+        //PARA AUTOCOMPLETAR
         public string datos { get; set; }
         public string letra { get; set; }
 

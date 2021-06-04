@@ -162,20 +162,18 @@ namespace SistemaInventario.WEBSERVICE.Controllers
                 throw ex;
             }
         }
-
-        /*
+        
         [HttpPost]
-        [Route("editarProduct")]
-        public IHttpActionResult editarProduct(ENProductos paramss)
+        [Route("editarProducto")]
+        public IHttpActionResult editarProducto(ENProductos paramss)
         {
             try
             {
-                var rpt = daproduc.editarProduct(paramss);
+                var rpt = daProductos.editarProducto(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -187,7 +185,7 @@ namespace SistemaInventario.WEBSERVICE.Controllers
         {
             try
             {
-                var rpt = daproduc.obtlistaProducto(paramss);
+                var rpt = daProductos.obtlistaProducto(paramss);
                 return Ok(rpt);
             }
             catch (Exception ex)
@@ -195,9 +193,7 @@ namespace SistemaInventario.WEBSERVICE.Controllers
 
                 throw ex;
             }
-        }
-        */
-
+        }       
 
     }
 }

@@ -180,20 +180,20 @@ namespace SistemaInventario.Controllers
             }
         }
 
-        /*
+        
         [HttpPost]
-        public ActionResult editarProduct(ENProductos paramss)
+        public ActionResult editarProducto(ENProductos paramss)
         {
             var session = Session.GetCurrentUser();
             var token = session.responsetoken;
             paramss.rucempresa = session.ruc;
 
-
-            var rpt = buproduc.editarProduct(paramss, token);
+            var rpt = buProductos.editarProducto(paramss, token);
             return Json(new { dt = rpt });
         }
 
 
+        /* ES DE TIPO JSONRESULT, OBTIENE LA LISTA DE PRODUCTOS*/
         [HttpPost]
         public JsonResult obtlistaProducto(string letra)
         {
@@ -203,10 +203,10 @@ namespace SistemaInventario.Controllers
             ENProductos paramss = new ENProductos();
             paramss.rucempresa = session.ruc;
             paramss.letra = letra;
-            return Json(buproduc.obtlistaProducto(paramss, token), JsonRequestBehavior.AllowGet);
+            return Json(buProductos.obtlistaProducto(paramss, token), JsonRequestBehavior.AllowGet);
         }
 
-
+        /*
         [HttpPost]
         public JsonResult obtlistaProducto_cod(ENProductos paramss)
         {

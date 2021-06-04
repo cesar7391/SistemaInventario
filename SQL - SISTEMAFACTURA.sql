@@ -432,10 +432,10 @@ BEGIN
 	end
 end 
 */
---*********************************************** SP LISTAR PRODUCTOS
+--*********************************************** SP LISTAR PRODUCTOS (EDITADO cesar_7391@outlook.com)
 /*
 EXECUTE usp_listarProductos '00000000'
-CREATE PROCEDURE usp_listarProductos(@rucempresa nchar(20))
+ALTER PROCEDURE usp_listarProductos(@rucempresa nchar(20))
 AS
 BEGIN
 	SELECT TOP 1000 ROW_NUMBER() OVER(ORDER BY a.idproducto ASC) AS Row,  a.idproducto,
@@ -447,7 +447,7 @@ BEGIN
 	a.status
 	FROM dtproductos a
 	inner join dtdepartamentos b on a.iddepart = b.iddepartamento
-	WHERE a.rucempresa = @rucempresa
+	WHERE a.rucempresa = @rucempresa AND b.status = 1
 END
 */
 --*********************************************** SP BUSCAR PRODUCTOS
@@ -532,7 +532,8 @@ BEGIN
 	where a.ruc = @rucempresa
 END
 */
---***********************************************
+--*********************************************** PARA OBTENER EL PRODUCTO
+/*
 CREATE procedure usp_obtEditarProducto(@idproducto int)
 AS
 BEGIN
@@ -543,5 +544,171 @@ BEGIN
 	inner join dtdepartamentos b on a.iddepart = b.iddepartamento   
 	where idproducto = @idproducto
 end
+*/
+--*********************************************** PARA EDITAR EL PRODUCTO
+/*
+CREATE PROCEDURE usp_editarProducto(
+@idproducto int,
+@rucempresa nchar(20),
+@tipo int,
+@codbarra nchar(50),
+@desc varchar(max),
+@tproduct int,
+@pcosto decimal(18,2),
+@ganancia decimal(18,2),
+@pventa decimal(18,2),
+@pmayoreo decimal(18,2),
+@apartir int,
+@sldepart int,
+@existen int,
+@minexisten int,
+@fvenci nchar(50),
+@faplica int
+)     
+AS
+BEGIN
+	DECLARE @fvencimiento date
+	/****************************************** SI EL TIPO ES 1, ENTONCES ES UN PRODUCTO ******************************************/
+	IF @tipo = 1
+	BEGIN
+		if not exists(select * from dtproductos where  codbarra = @codbarra and rucempresa = @rucempresa and idproducto != @idproducto)
+		BEGIN
+			IF not exists(select * from dtproductos where  descripcion = @desc and rucempresa = @rucempresa and idproducto != @idproducto)
+			BEGIN
+				if @fvenci = ''
+				BEGIN						
+					SELECT @fvencimiento =  GETDATE();
+				END
+				ELSE
+				BEGIN
+					SELECT @fvencimiento =  CAST(@fvenci as date);
+				END
+			UPDATE dtproductos set tipo = @tipo, codbarra =@codbarra, descripcion =  @desc, tproduct = @tproduct, pcosto = @pcosto,
+			ganancia = @ganancia, pventa =@pventa, pmayoreo =  @pmayoreo, apartir = @apartir,
+			iddepart =  @sldepart, existencia = @existen,minexisten = @minexisten, fvenci =@fvencimiento, faplica = @faplica, status = 1,
+			rucempresa= @rucempresa
+			WHERE idproducto = @idproducto
+			SELECT 'ok'response
+			END
+			ELSE
+			BEGIN
+				SELECT 'La descripción ya se encuentra registrada' response
+			END
+		END
+		ELSE
+		BEGIN
+			SELECT 'El código de barras ya se encuentra registrado' response
+		END
+	END
+	/****************************************** SI EL TIPO ES 2, ENTONCES ES UN SERVICIO ******************************************/
+	IF	@tipo = 2
+	BEGIN
+		IF not exists(select * from dtproductos where  descripcion = @desc and rucempresa = @rucempresa and idproducto != @idproducto)
+		BEGIN
+			IF @fvenci = ''
+			BEGIN
+				SELECT @fvencimiento = GETDATE();
+			END
+			ELSE
+			BEGIN
+				SELECT @fvencimiento = CAST(@fvenci as date);
+			END
+			update dtproductos set  tipo = @tipo,codbarra = @codbarra, descripcion = @desc, tproduct = @tproduct, pcosto=0,
+			ganancia = 100,pventa=@pventa, pmayoreo =  0, apartir = 0,
+			iddepart =  @sldepart, existencia = 0,minexisten = 0, fvenci =@fvencimiento, faplica = 1, status = 1,
+			rucempresa= @rucempresa where idproducto = @idproducto
+			SELECT 'ok'response
+		END
+		ELSE
+		BEGIN
+			SELECT 'La descripción ya se encuentra registrada' response
+		END
+	END
+END
+*/
+--*********************************************** PARA GUARDAR DEPARTAMENTOS
+/*
+CREATE PROCEDURE usp_guardarDepartamento(@departamento nchar(100),@rucempresa nchar(20))
+AS
+BEGIN
+	if not exists(select * from dtdepartamentos where departamento = @departamento and rucempresa = @rucempresa)
+	begin
+		insert into dtdepartamentos values(@departamento, @rucempresa, 1)
+		select 'ok' response
+	end
+	else
+	begin
+		select 'El departamento ya se encuentra registrado' response
+	end
+end   
+*/
+--*********************************************** PARA LISTAR DEPARTAMENTOS
+/*
+CREATE PROCEDURE usp_listadepartamentos(@rucempresa nchar(20))
+as
+begin
+	select top 1000 ROW_NUMBER() OVER(ORDER BY iddepartamento ASC) AS Row, iddepartamento,
+	LTRIM(RTRIM(departamento))departamento, status
+	from dtdepartamentos 
+	where rucempresa  = @rucempresa
+end
+*/
+--*********************************************** PARA ELIMINAR DEPARTAMENTOS
+/*
+CREATE procedure usp_eliminarDepartamento(@iddepartamento int)
+AS
+BEGIN
+	delete dtdepartamentos where iddepartamento = @iddepartamento
+	select 'ok' response
+END
+*/
+--*********************************************** PARA DAR DE BAJA DEPARTAMENTOS
+/*
+CREATE procedure usp_bajaDepartamento(@iddepartamento int)
+AS
+BEGIN
+	update dtdepartamentos set status = 0 where iddepartamento = @iddepartamento
+	select 'ok' response
+END
+*/
+--*********************************************** PARA OBTENER DEPARTAMENTOS (PARA EDITAR)
+/*
+create procedure usp_obtEditarDepartamento(@iddepartamento int)
+AS
+BEGIN
+	select iddepartamento, RTRIM(LTRIM(departamento)) departamento from dtdepartamentos where iddepartamento =  @iddepartamento
+end
+*/
+--*********************************************** PARA EDITAR DEPARTAMENTOS
+/*
+create procedure usp_editarDepartamento(@iddepartamento int, @departamento nchar(100),@rucempresa nchar(20))
+as
+begin
+	if not exists(select * from dtdepartamentos where departamento = @departamento and iddepartamento != @iddepartamento and rucempresa = @rucempresa)
+	begin
+		update dtdepartamentos set departamento = @departamento where iddepartamento = @iddepartamento
+		select 'ok' response
+	end
+	else
+	begin
+		select 'El departamento ya se encuentra registrado' response
+	end
+end   
+*/
+--*********************************************** PARA BUSCAR
 
-
+create procedure usp_obtlistaProducto(@letra varchar(200),@rucempresa nchar(20))
+as
+begin
+	select  a.idproducto, a.descripcion, RTRIM(LTRIM(c.moneda)) +' '+ cast(a.pventa as nchar) precioventa
+	from dtproductos a
+	inner join dtempresa b on b.ruc = a.rucempresa
+	inner join dtmoneda c on c.idmoneda = b.idmoneda
+	where a.descripcion LIKE '%'+@letra+'%' AND a.rucempresa = @rucempresa
+	UNION
+	select  a.idproducto, a.descripcion, RTRIM(LTRIM(c.moneda)) +' '+ cast(a.pventa as nchar) precioventa
+	from dtproductos a
+	inner join dtempresa b on b.ruc = a.rucempresa
+	inner join dtmoneda c on c.idmoneda = b.idmoneda
+	where a.codbarra =@letra AND a.rucempresa = @rucempresa
+end

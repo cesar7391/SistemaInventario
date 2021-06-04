@@ -429,8 +429,8 @@ namespace SistemaInventario.DATOS
             }
         }
 
-        /*
-        public ResponseProductos editarProduct(ENProductos paramss)
+        
+        public ResponseProductos editarProducto(ENProductos paramss)
         {
             try
             {
@@ -440,7 +440,7 @@ namespace SistemaInventario.DATOS
                 using (SqlConnection conn = new SqlConnection(cs))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("usp_editarProduct", conn);
+                    SqlCommand cmd = new SqlCommand("usp_editarProducto", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@idproducto", paramss.idproducto));
                     cmd.Parameters.Add(new SqlParameter("@rucempresa", paramss.rucempresa));
@@ -448,23 +448,16 @@ namespace SistemaInventario.DATOS
                     cmd.Parameters.Add(new SqlParameter("@codbarra", paramss.codbarra));
                     cmd.Parameters.Add(new SqlParameter("@desc", paramss.desc));
                     cmd.Parameters.Add(new SqlParameter("@tproduct", paramss.tproduct));
+
                     if (paramss.pcosto == null)
-                    {
                         cmd.Parameters.Add(new SqlParameter("@pcosto", "0"));
-                    }
                     else
-                    {
                         cmd.Parameters.Add(new SqlParameter("@pcosto", paramss.pcosto));
-                    }
 
                     if (paramss.ganancia == null)
-                    {
                         cmd.Parameters.Add(new SqlParameter("@ganancia", "0"));
-                    }
                     else
-                    {
                         cmd.Parameters.Add(new SqlParameter("@ganancia", paramss.ganancia));
-                    }
 
 
                     cmd.Parameters.Add(new SqlParameter("@pventa", paramss.pventa));
@@ -473,17 +466,13 @@ namespace SistemaInventario.DATOS
                     cmd.Parameters.Add(new SqlParameter("@sldepart", paramss.sldepart));
                     cmd.Parameters.Add(new SqlParameter("@existen", paramss.existen));
                     cmd.Parameters.Add(new SqlParameter("@minexisten", paramss.minexisten));
+
                     if (paramss.fvenci == null)
-                    {
                         cmd.Parameters.Add(new SqlParameter("@fvenci", ""));
-                    }
                     else
-                    {
                         cmd.Parameters.Add(new SqlParameter("@fvenci", paramss.fvenci));
-                    }
 
                     cmd.Parameters.Add(new SqlParameter("@faplica", paramss.faplica));
-
 
                     using (SqlDataReader rdr = cmd.ExecuteReader())
                     {
@@ -499,7 +488,6 @@ namespace SistemaInventario.DATOS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -520,8 +508,6 @@ namespace SistemaInventario.DATOS
                     cmd.Parameters.Add(new SqlParameter("@letra", paramss.letra));
                     cmd.Parameters.Add(new SqlParameter("@rucempresa", paramss.rucempresa));
 
-
-
                     using (SqlDataReader rdr = cmd.ExecuteReader())
                     {
                         while (rdr.Read())
@@ -541,10 +527,8 @@ namespace SistemaInventario.DATOS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-        */
     }
 }

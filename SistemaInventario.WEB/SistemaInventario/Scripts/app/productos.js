@@ -90,7 +90,7 @@ $("#rdrservicio").on("click", function () {
     document.getElementById("chknoaplica").checked = true;
     document.getElementById("chknoaplica").disabled = true;
 
-    $("#txtcodbarra").val("");
+    $("#txtcodbarra").val("NA");
     $("#txtdesc").val("");
     $("#txtpcosto").val("");
     $("#txtganancia").val("");
@@ -233,6 +233,7 @@ $("#txtapartir").keyup(function () {
         }
     }
 })
+
 
 $("#btnguardar").on("click", function () {
 
@@ -624,13 +625,14 @@ $("#btnModificar").on("click", function () {
                 $("#lblprin").html("EDITAR PRODUCTO");
                 document.getElementById("diveditproduct").style.display = "block";
                 document.getElementById("divcatalogo").style.display = "none";
+                //Se obtiene el ID y se pone en la etiqueta escondida
                 $("#idproductos").val(datos.dt.idproducto);
                 $("#obtsl").append("<option value=" + datos.dt.iddepartamento + ">" + datos.dt.departamento + "</option>");
                 $("#edittxtiddepartamentos").val(datos.dt.iddepartamento);
                 document.getElementById("edittxtexist").disabled = true;
                 if (datos.dt.tipo1 == 1) {
 
-                    $("#lblmensaje").html("Para modificar el inventario de un producto existente. Hágalo desde el módulo de inventarios.").css("color", "red");
+                    $("#lblmensaje").html("Sólo se puede modificar desde el módulo de inventarios.").css("color", "red");
 
                     document.getElementById('editrdrbien').checked = true;
                     document.getElementById("editrdrservicio").disabled = true;
@@ -716,4 +718,315 @@ $("#btnModificar").on("click", function () {
             confirmButtonText: 'Cerrar'
         })
     }
+})
+
+//Para la vista de EDICIÓN
+$("#editrdrunca").on("click", function () {
+    document.getElementById("editrdrunca").checked = true;
+    document.getElementById("editrdrkigra").checked = false;
+})
+
+$("#editrdrkigra").on("click", function () {
+    document.getElementById("editrdrunca").checked = false;
+    document.getElementById("editrdrkigra").checked = true;
+})
+
+$("#edittxtganancia").keyup(function () {
+    debugger;
+    let pcosto = $("#edittxtpcosto").val();
+    let ganancia = $("#edittxtganancia").val();
+
+    if (pcosto != "") {
+
+        let params = new Object();
+        params.pcosto = pcosto;
+        params.ganancia = ganancia;
+        Post("Productos/calcularPventaSinImpuestos", params).done(function (datos) {
+
+            if (datos.dt != null) {
+                $("#edittxtpvenser").val(separadorDecimales(datos.dt.pventa.toFixed(2)));
+            } else {
+                $("#edittxtpvenser").val("");
+            }
+        })
+    } else {
+        alertify.error("El precio de costo no debe estar vacio");
+    }
+})
+
+$("#edittxtpcosto").keyup(function () {
+    //debugger;
+    let pcosto = $("#edittxtpcosto").val();
+    let ganancia = $("#edittxtganancia").val();
+
+    if (pcosto.trim() != "") {
+
+        let params = new Object();
+        params.pcosto = pcosto;
+        params.ganancia = ganancia;
+        Post("Productos/calcularPventaSinImpuestos", params).done(function (datos) {
+
+            if (datos.dt != null) {
+                $("#edittxtpvenser").val(separadorDecimales(datos.dt.pventa.toFixed(2)));
+            } else {
+                $("#edittxtpvenser").val("");
+            }
+        })
+
+    } else {
+        alertify.error("El precio de costo no debe estar vacio");
+    }
+})
+
+$("#edittxtpmayoreo").keyup(function () {
+
+    let pmayoreo = $("#edittxtpmayoreo").val();
+    let pventa = $("#edittxtpvenser").val();
+
+    let params = new Object();
+    params.pmayoreo = pmayoreo;
+    params.pventa = pventa;
+    Post("Productos/calculoPrecios", params).done(function (datos) {
+
+        if (datos.dt == "ok") {
+            if (pmayoreo.trim() != "") {
+                document.getElementById("edittxtapartir").disabled = false;
+                $("#edittxtpmayoreo").css("border-color", "");
+            } else {
+                document.getElementById("edittxtapartir").disabled = true;
+                $("#edittxtapartir").val("");
+                $("#edittxtpmayoreo").css("border-color", "");
+            }
+        } else {
+            alertify.error("El Precio mayoreo no debe ser mayor al precio de venta");
+            $("#edittxtpmayoreo").css("border-color", "red");
+        }
+    })
+})
+
+$("#edittxtapartir").keyup(function () {
+    let pmayoreo = $("#edittxtpmayoreo").val();
+    let apartir = $("#edittxtapartir").val();
+
+    if (pmayoreo.trim() == "") {
+        document.getElementById("edittxtapartir").disabled = true;
+        $("#edittxtapartir").val("");
+    } else {
+        //debugger;
+        if (apartir < 2) {
+            alertify.error("Deben ser más de 2 productos para aplicar precio de mayoreo");
+            $("#edittxtapartir").val("");
+            $("#edittxtapartir").focus();
+            $("#edittxtapartir").css("border-color", "red");
+        } else {
+            $("#edittxtapartir").css("border-color", "");
+        }
+    }
+})
+
+$("#btneditar").on("click", function () {
+
+    let idproducto = $("#idproductos").val();
+    let rdbien = document.getElementById('editrdrbien').checked;
+    let rdservicio = document.getElementById('editrdrservicio').checked;
+    let tipo = 0;
+    let codbarra = $("#edittxtcodbarra").val();
+    let desc = $("#edittxtdesc").val();
+    let rdrunca = document.getElementById('editrdrunca').checked;
+    let rdrkigra = document.getElementById('editrdrkigra').checked;
+    let tproduct = 0;
+    let pcosto = $("#edittxtpcosto").val();
+    let ganancia = $("#edittxtganancia").val();
+    let pventa = $("#edittxtpvenser").val();
+    let pmayoreo = $("#edittxtpmayoreo").val();
+    let apartir = $("#edittxtapartir").val();
+    let sldepart = $("#edittxtiddepartamentos").val();  //$("#editsldepart").val();
+    let existen = $("#edittxtexist").val();
+    let minexisten = $("#edittxtstockmin").val();
+    let fvenci = $("#edittxtfvenci").val();
+    let sinoaplica = document.getElementById('editchknoaplica').checked;
+    let faplica = 0;
+
+    if (rdservicio) {
+        tipo = 2;
+        if (desc.trim() == "") {
+            alertify.error("Ingrese la descripción del producto");
+            $("#edittxtdesc").val("");
+            $("#edittxtdesc").focus();
+            $("#edittxtdesc").css("border-color", "red");
+            return false;
+        } else if (pventa.trim() == "") {
+            $("#edittxtdesc").css("border-color", "");
+            alertify.error("Ingrese el precio del servicio del producto");
+            $("#edittxtpvenser").val("");
+            $("#edittxtpvenser").focus();
+            $("#edittxtpvenser").css("border-color", "red");
+            return false;
+        } else if (sldepart.trim() == 0) {
+            $("#edittxtpvenser").css("border-color", "");
+            alertify.error("Seleccione un departamento");
+            $("#editsldepart").val(0);
+            $("#editsldepart").css("border-color", "red");
+            return false;
+        } else if (rdrunca) {
+            tproduct = 1;
+        } else if (rdrkigra) {
+            tproduct = 2;
+        } else {
+            $("#edittxtpvenser").css("border-color", "");
+            $("#editsldepart").css("border-color", "");
+            $("#edittxtdesc").css("border-color", "");
+        }
+    }
+
+    if (rdbien) {
+        tipo = 1;
+
+        if (codbarra.trim() == "") {
+            alertify.error("Ingrese el codigo de barrar del producto");
+            $("#edittxtcodbarra").val("");
+            $("#edittxtcodbarra").focus();
+            $("#edittxtcodbarra").css("border-color", "red");
+            return false;
+        } else if (desc.trim() == "") {
+            $("#edittxtcodbarra").css("border-color", "");
+            alertify.error("Ingrese la descripción del producto");
+            $("#edittxtdesc").val("");
+            $("#edittxtdesc").focus();
+            $("#edittxtdesc").css("border-color", "red");
+            return false;
+        } else if (pcosto.trim() == "") {
+            $("#edittxtdesc").css("border-color", "");
+            alertify.error("Ingrese el precio costo del producto");
+            $("#edittxtpcosto").val("");
+            $("#edittxtpcosto").focus();
+            $("#edittxtpcosto").css("border-color", "red");
+            return false;
+        } else if (ganancia.trim() == "") {
+            $("#edittxtpcosto").css("border-color", "");
+            alertify.error("Ingrese el precio costo del producto");
+            $("#edittxtganancia").val("");
+            $("#edittxtganancia").focus();
+            $("#edittxtganancia").css("border-color", "red");
+            return false;
+        } else if (pventa.trim() == "") {
+            $("#txtganancia").css("border-color", "");
+            alertify.error("Ingrese el precio de venta del producto");
+            $("#edittxtpvenser").val("");
+            $("#edittxtpvenser").focus();
+            $("#edittxtpvenser").css("border-color", "red");
+            return false;
+        } else if (pmayoreo.trim() == "") {
+            $("#edittxtpvenser").css("border-color", "");
+            alertify.error("Ingrese el precio mayoreo del producto");
+            $("#edittxtpmayoreo").val("");
+            $("#edittxtpmayoreo").focus();
+            $("#edittxtpmayoreo").css("border-color", "red");
+            return false;
+        } else if (pmayoreo.trim() != "") {
+            if (apartir.trim() == "") {
+                $("#edittxtpmayoreo").css("border-color", "");
+                alertify.error("Ingrese la cantidad de productos para el precio mayoreo");
+                $("#edittxtapartir").val("");
+                $("#edittxtapartir").focus();
+                $("#edittxtapartir").css("border-color", "red");
+                return false;
+            } else if (sldepart.trim() == 0) {
+                $("#edittxtapartir").css("border-color", "");
+                alertify.error("Seleccione un departamento");
+                $("#editsldepart").val(0);
+                $("#editsldepart").css("border-color", "red");
+                return false;
+            } else if (existen.trim() == "") {
+                $("#editsldepart").css("border-color", "");
+                alertify.error("Ingrese la cantidad de existencias del producto");
+                $("#edittxtexist").val("");
+                $("#edittxtexist").focus();
+                $("#edittxtexist").css("border-color", "red");
+                return false;
+            } else if (rdrunca) {
+                $("#edittxtdesc").css("border-color", "");
+                tproduct = 1;
+            } else if (rdrkigra) {
+                tproduct = 2;
+            }
+        }
+    }
+
+    if (sinoaplica) {
+        faplica = 1
+    } else {
+        if (fvenci.trim() == "") {
+            alertify.error("Ingrese la fecha de vencimiento");
+            $("#edittxtfvenci").val("");
+            $("#edittxtfvenci").css("border-color", "red");
+            return false;
+        } else {
+            $("#edittxtfvenci").css("border-color", "");
+        }
+    }
+
+    let params = new Object();
+    params.idproducto = idproducto;
+    params.tipo = tipo;
+    params.codbarra = codbarra;
+    params.desc = desc;
+    params.tproduct = tproduct;
+    params.pcosto = pcosto;
+    params.ganancia = ganancia;
+    params.pventa = pventa;
+    params.pmayoreo = pmayoreo;
+    params.apartir = apartir;
+    params.sldepart = sldepart;
+    params.existen = existen;
+    params.minexisten = minexisten;
+    params.fvenci = fvenci;
+    params.faplica = faplica;
+    Post("Productos/editarProducto", params).done(function (datos) {
+        if (datos.dt.response == 'ok') {
+            swal({
+                position: 'top-end',
+                type: 'success',
+                title: "Producto editado correctamente",
+                text: 'Editado',
+                showConfirmButton: true,
+                timer: 60000,
+                confirmButtonText: 'Cerrar'
+            }, function () {
+                window.location = fnBaseURLWeb("Productos/Productos");
+            })
+        } else {
+            swal({
+                position: 'top-end',
+                type: 'error',
+                title: datos.dt.response,
+                text: 'Valide los campos o contacte con el administrador del sistema',
+                showConfirmButton: true,
+                timer: 60000,
+                confirmButtonText: 'Cerrar'
+            })
+        }
+    })
+})
+
+$("#editbtnvolver").on("click", function () {
+    window.location = fnBaseURLWeb("Productos/Productos");
+})
+
+$("#editsldepart").change(function () {
+    //Cada vez que se mueva el select de departamento, se carga el ID en un txt oculto
+    let id = $("#editsldepart").val();
+    $("#edittxtiddepartamentos").val(id);
+})
+
+$("#cerrarModulo").on("click", function () {
+    window.location = fnBaseURLWeb("Panel/Panel");
+})
+
+$("#btndepartamentos").on("click", function () {
+    window.location = fnBaseURLWeb("Departamentos/Departamentos");
+})
+
+$("#btnpromociones").on("click", function () {
+    window.location = fnBaseURLWeb("Promociones/Promociones");
 })

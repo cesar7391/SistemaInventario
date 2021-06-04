@@ -121,11 +121,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivarCuentaController.cs" />
+    <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\PromocionesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\RegistroEmpresaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -332,9 +334,11 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\departamentos.js" />
     <Content Include="Scripts\app\empleados.js" />
     <Content Include="Scripts\app\panel.js" />
     <Content Include="Scripts\app\productos.js" />
+    <Content Include="Scripts\app\promociones.js" />
     <Content Include="Scripts\app\proveedores.js" />
     <Content Include="Scripts\app\registroempresa.js" />
     <Content Include="Scripts\js\global.js" />
@@ -373,6 +377,8 @@
     <Content Include="Views\Empleados\Empleados.cshtml" />
     <Content Include="Views\Proveedores\Proveedores.cshtml" />
     <Content Include="Views\Productos\Productos.cshtml" />
+    <Content Include="Views\Departamentos\Departamentos.cshtml" />
+    <Content Include="Views\Promociones\Promociones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SistemaInventario.BUSINESS\SistemaInventario.BUSINESS.csproj">

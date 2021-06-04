@@ -129,13 +129,12 @@ namespace SistemaInventario.BUSINESS
                 throw ex;
             }
         }
-
-        /*
-        public ResponseProductos editarProduct(ENProductos paramss, string token)
+        
+        public ResponseProductos editarProducto(ENProductos paramss, string token)
         {
             try
             {
-                return JsonConvert.DeserializeObject<ResponseProductos>(clients.Post<ENProductos>("Productos/editarProduct", paramss, token));
+                return JsonConvert.DeserializeObject<ResponseProductos>(clients.Post<ENProductos>("Productos/editarProducto", paramss, token));
             }
             catch (Exception ex)
             {
@@ -143,7 +142,6 @@ namespace SistemaInventario.BUSINESS
                 throw ex;
             }
         }
-
 
         public List<ResponseProductos> obtlistaProducto(ENProductos paramss, string token)
         {
@@ -153,10 +151,9 @@ namespace SistemaInventario.BUSINESS
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-        */
+
     }
 }

@@ -35,5 +35,8 @@ namespace SistemaInventario.Models
         public List<ResponseProductos> listaBuscarPD { get; set; }
 
         public ResponseProductos tipomoneda { get; set; }
+
+        //********************************* PROMOCIONES
+        public List<ResponsePromociones> listaPromociones { get; set; }
     }
 }

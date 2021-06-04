@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DADepartamentos.cs" />
     <Compile Include="DAEmpleados.cs" />
     <Compile Include="DALogin.cs" />
     <Compile Include="DAPaises.cs" />

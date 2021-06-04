@@ -44,10 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUDepartamentos.cs" />
     <Compile Include="BUEmpleados.cs" />
     <Compile Include="BULogin.cs" />
     <Compile Include="BUPais.cs" />
     <Compile Include="BUProductos.cs" />
+    <Compile Include="BUPromociones.cs" />
     <Compile Include="BUProveedores.cs" />
     <Compile Include="BURegistroEmpresa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

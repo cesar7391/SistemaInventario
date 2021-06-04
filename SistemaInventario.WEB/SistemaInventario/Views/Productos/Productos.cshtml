@@ -9,13 +9,16 @@
 <br />
 
 <div class="panel panel-warning">
-    <div class="panel-heading"><b>Productos</b></div>
+    <div class="panel-heading">
+        <b>Productos</b>
+        <button type="button" class="btn btn-danger btn-sm" style="float:right;" id="cerrarModulo"><i class="fa fa-window-close"></i></button>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             <button class="btn btn-default" id="btncatalogo"><img src="~/Content/img/imagenes/calendario.png" alt="Alternate Text" /> Catálogo</button>
-            <button class="btn btn-default" ><img src="~/Content/img/imagenes/departamento.png" alt="Alternate Text" /> Departamentos</button>
-            <button class="btn btn-default" ><img src="~/Content/img/imagenes/estrella.png" alt="Alternate Text" /> Promociones</button>
+            <button class="btn btn-default" id="btndepartamentos"><img src="~/Content/img/imagenes/departamento.png" alt="Alternate Text" /> Departamentos</button>
+            <button class="btn btn-default" id="btnpromociones"><img src="~/Content/img/imagenes/estrella.png" alt="Alternate Text" /> Promociones</button>
             <button class="btn btn-default" ><img src="~/Content/img/imagenes/expediente.png" alt="Alternate Text" /> Importar</button>
             <button class="btn btn-default" ><img src="~/Content/img/imagenes/xls.png" alt="Alternate Text" /> Exportar</button>
         </div>
@@ -441,7 +444,7 @@
                         </select>
 
                     </div>
-
+                    <!-- Aquí es donde estará el id de departamentos para modificar -->
                     <input type="hidden" id="edittxtiddepartamentos" />
 
                 </div>
@@ -454,7 +457,6 @@
                     <div class="input-group">
                         <span class="input-group-addon">Existencia</span>
                         <input type="text" class="form-control" id="edittxtexist" placeholder="0" onkeypress="return solonumeros(event);" />
-
                     </div>
                     <span id="lblmensaje"></span>
                 </div>
