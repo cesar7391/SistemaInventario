@@ -517,7 +517,7 @@ namespace SistemaInventario.DATOS
                             resul.idproducto = Convert.ToInt32(rdr["idproducto"]);
                             resul.desc = Convert.ToString(rdr["descripcion"]);
                             resul.precioventa = Convert.ToString(rdr["precioventa"]);
-                            resul.existen = Convert.ToInt32(rdr["existencias"]);
+                            //resul.existen = Convert.ToInt32(rdr["existencias"]);
 
                             lista.Add(resul);
                         }

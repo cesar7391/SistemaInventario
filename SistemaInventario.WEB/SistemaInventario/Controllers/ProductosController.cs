@@ -206,7 +206,7 @@ namespace SistemaInventario.Controllers
             return Json(buProductos.obtlistaProducto(paramss, token), JsonRequestBehavior.AllowGet);
         }
 
-        /*
+        
         [HttpPost]
         public JsonResult obtlistaProducto_cod(ENProductos paramss)
         {
@@ -215,11 +215,9 @@ namespace SistemaInventario.Controllers
             paramss.rucempresa = session.ruc;
             paramss.letra = paramss.codbarra;
 
-            var rpt = buproduc.obtlistaProducto(paramss, token);
+            var rpt = buProductos.obtlistaProducto(paramss, token);
             return Json(new { dt = rpt });
-
-
         }
-        */
+        
     }
 }

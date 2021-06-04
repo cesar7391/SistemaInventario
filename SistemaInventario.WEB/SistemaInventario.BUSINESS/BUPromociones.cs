@@ -38,7 +38,7 @@ namespace SistemaInventario.BUSINESS
         {
             try
             {
-                return JsonConvert.DeserializeObject<List<ResponsePromociones>>(clients.Post<ENPromociones>("Promociones/listaPromociones", paramss, token));
+                return JsonConvert.DeserializeObject<List<ResponsePromociones>>(clients.Post<ENPromociones>("Promociones/listarPromociones", paramss, token));
             }
             catch (Exception ex)
             {

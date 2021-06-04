@@ -25,6 +25,7 @@
             <center>
                 <h3 style="color:#ff6a00;" id="lblprin"> </h3>
             </center>
+
         </div>
 
     </div>
@@ -46,6 +47,7 @@
                     <button class="btn btn-default" id="btnModificar"><img src="~/Content/img/imagenes/lapiz.png" alt="Alternate Text" /> Modificar</button>
                     <button class="btn btn-default" id="btneliminar"><img src="~/Content/img/imagenes/eli.png" alt="Alternate Text" /> Eliminar</button>
                 </div>
+
             </div>
 
 
@@ -59,14 +61,15 @@
                             <th></th>
                             <th>Nombre promoción</th>
                             <th>Producto</th>
-                            <th>Código barra</th>
+                            <th>Codigo barra</th>
                             <th>P. Venta</th>
-                            <th>Fecha Incio</th>
-                            <th>Fecha Fin</th>
-                            <th>Status</th>
+                            <th>f. incio</th>
+                            <th>f. fin</th>
+                            <th>status</th>
                         </tr>
                     </thead>
                     <tbody id="tbpromo">
+                        
                         @foreach (var item in Model.listaPromociones)
                         {
                             <tr>
@@ -95,6 +98,7 @@
                                 }
                             </tr>
                         }
+
                     </tbody>
                 </table>
 
@@ -102,15 +106,17 @@
 
         </div>
 
+
+
         <div class="divnewpromo">
 
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <input type="text" id="txtcodbarra" class="form-control" placeholder="Buscar producto por lector de barras" />
+                    <input type="text" id="txtcodbarra" class="form-control" placeholder="Buscar producto por lectora de barras" />
                     <input type="text" id="txtdescripcion" class="form-control" placeholder="Buscar producto por descripción" />
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary" id="btnlectora">Lector</button>
+                    <button class="btn btn-primary" id="btnlectora">Lectora</button>
                     <button class="btn btn-info" id="btnteclado">Teclado</button>
                 </div>
             </div>
@@ -124,6 +130,7 @@
                     </center>
 
                 </div>
+
             </div>
 
 
@@ -206,10 +213,10 @@
             <div class="col-md-12">
                 <br /><br />
                 <div class="col-md-3">
-                    <button class="btn btn-default btnvolver"><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
-                 </div>
-                <div class="col-md-3">
                     <button class="btn btn-default" id="btnEditar"><img src="~/Content/img/imagenes/guardar.png" alt="Alternate Text" /> Modificar</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-default btnvolver"><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
                 </div>
 
             </div>

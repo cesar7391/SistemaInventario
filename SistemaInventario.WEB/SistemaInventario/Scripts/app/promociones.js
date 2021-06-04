@@ -6,7 +6,7 @@
     $(".diveditpromo").hide();
 
     $(".ocultar").hide();
-    //$(".diveditdepartamento").hide();
+    $(".diveditdepartamento").hide();
     $("#txtdescripcion").hide();
     $("#txtcodbarra").show();
 
@@ -47,34 +47,15 @@ $("#btnteclado").on("click", function () {
 })
 
 $("#txtdescripcion").autocomplete({
-    //Recibe y da una respuesta
-    source: function (request, response) {
-        //De global.js
-        PostAutocomplete("Productos/obtlistaProducto/", request.term).done(function (data) {
-            response($.map(data, function (item) {
-                return { label: item.desc, value: item.desc, id: item.idproducto };
-            }))
-        })
-
-    }
-})
-
-/*
-$("#txtdescripcion").autocomplete({
 
     source: function (request, response) {
         PostAutocomplete("Productos/obtlistaProducto/", request.term).done(function (data) {
-
             response($.map(data, function (item) {
-
                 return { label: item.desc, value: item.desc, id: item.idproducto, precioventa: item.precioventa };
-
             }))
 
         })
     },
-
-
     select: function (event, ui) {
 
         let descripcion = ui.item.value;
@@ -87,10 +68,7 @@ $("#txtdescripcion").autocomplete({
         $("#txtidproducto").val(idproducto);
         $("#txtdescripcion").val("");
     }
-
 })
-*/
-
 
 $("#txtcodbarra").keyup(function (e) {
     e.preventDefault();
@@ -110,9 +88,6 @@ $("#txtcodbarra").keyup(function (e) {
             $("#txtidproducto").val(datos.dt[0].idproducto);
         })
     }
-
-
-
 })
 
 

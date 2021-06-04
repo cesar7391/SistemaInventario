@@ -696,8 +696,8 @@ begin
 end   
 */
 --*********************************************** PARA BUSCAR
-
-create procedure usp_obtlistaProducto(@letra varchar(200),@rucempresa nchar(20))
+/*
+alter procedure usp_obtlistaProducto(@letra varchar(200), @rucempresa nchar(20))
 as
 begin
 	select  a.idproducto, a.descripcion, RTRIM(LTRIM(c.moneda)) +' '+ cast(a.pventa as nchar) precioventa
@@ -712,3 +712,98 @@ begin
 	inner join dtmoneda c on c.idmoneda = b.idmoneda
 	where a.codbarra =@letra AND a.rucempresa = @rucempresa
 end
+*/
+--*********************************************** TABLA PROMOCIONES
+/*
+create table dtpromociones(idpromo int identity(1,1) primary key,
+ promocion varchar(max), idproducto  int, finicio date, ffin date, status int, rucempresa nchar(20))
+ */
+ --*********************************************** GUARDAR PROMOCIÓN
+ /*
+CREATE PROCEDURE usp_guardarPromocion(
+@idproducto int,
+@promocion varchar(max),
+@finicio date,
+@ffin date,
+@rucempresa nchar(20))
+AS
+BEGIN
+	if not exists(select * from dtpromociones where promocion = @promocion and status = 1 and rucempresa = @rucempresa)
+	begin
+		if not exists(select * from dtpromociones where idproducto = @idproducto and status = 1 and rucempresa = @rucempresa)
+		begin
+			insert into dtpromociones values(@promocion,@idproducto, @finicio,@ffin, 1, @rucempresa)
+			select 'ok' response
+		end
+		else
+		begin
+			select 'El producto ya tiene una promoción activa' response
+		end
+	end
+	else
+	begin
+		select 'El nombre de la promoción ya esta registrado' response
+	end
+end
+*/
+--*********************************************** LISTAR PROMOCIONES
+/*
+CREATE procedure usp_listaPromociones (@rucempresa nchar(20))
+as
+begin
+	declare @f date = getdate();
+	update dtpromociones set status = 0 where ffin < @f
+	select top 1000 ROW_NUMBER() OVER(ORDER BY a.idpromo ASC) AS Row, a.idpromo idpromocion,
+	LTRIM(RTRIM(a.promocion))nombrePromocion, b.descripcion descProducto, b.codbarra, b.pventa,
+	cast(finicio as nchar(20)) finicio, cast(ffin as nchar(20)) ffin, a.status
+	from dtpromociones a
+	inner join dtproductos b on b.idproducto = a.idproducto
+	where a.rucempresa  = @rucempresa
+end
+*/
+--*********************************************** ELIMINAR PROMOCIONES
+/*
+CREATE procedure usp_eliminarPromociones(@idpromocion int)
+as
+begin
+	delete dtpromociones where idpromo = @idpromocion
+	select 'ok' response
+end
+*/
+--*********************************************** OBTENER PROMOCIONES
+/*
+ALTER procedure usp_obtPromociones (@rucempresa nchar(20),@idpromo int)
+as
+begin
+	select a.idpromo idpromocion
+	,LTRIM(RTRIM(a.promocion))nombrePromocion, b.descripcion descProducto,b.idproducto,  RTRIM(LTRIM(d.moneda)) +' '+ cast(b.pventa as nchar) pventa
+	,LTRIM(RTRIM(cast(finicio as nchar(20)))) finicio, LTRIM(RTRIM(cast(ffin as nchar(20)))) ffin, 'ok' response
+	from dtpromociones a
+	inner join dtproductos b on b.idproducto = a.idproducto
+	inner join dtempresa c on c.ruc = a.rucempresa
+	inner join dtmoneda d on d.idmoneda = c.idmoneda
+	where a.rucempresa  = @rucempresa and a.idpromo = @idpromo
+end
+*/
+--*********************************************** EDITAR PROMOCIONES
+/*
+create procedure usp_editarPromocion(
+@idpromo int,
+@promocion varchar(max),
+@finicio date,
+@ffin date,
+@rucempresa nchar(20))
+as
+begin
+	if not exists(select * from dtpromociones where promocion = @promocion and idpromo <> @idpromo and rucempresa = @rucempresa)
+	begin
+		update  dtpromociones set  promocion = @promocion, finicio = @finicio, ffin = @ffin
+		where idpromo = @idpromo
+		select 'ok' response
+	end
+	else
+	begin
+		select 'El nombre de la promoción ya está registrado' response
+	end
+end
+*/
