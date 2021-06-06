@@ -696,23 +696,25 @@ begin
 end   
 */
 --*********************************************** PARA BUSCAR
-/*
+
 alter procedure usp_obtlistaProducto(@letra varchar(200), @rucempresa nchar(20))
 as
 begin
 	select  a.idproducto, a.descripcion, RTRIM(LTRIM(c.moneda)) +' '+ cast(a.pventa as nchar) precioventa
+	,a.existencia existencias
 	from dtproductos a
 	inner join dtempresa b on b.ruc = a.rucempresa
 	inner join dtmoneda c on c.idmoneda = b.idmoneda
 	where a.descripcion LIKE '%'+@letra+'%' AND a.rucempresa = @rucempresa
 	UNION
 	select  a.idproducto, a.descripcion, RTRIM(LTRIM(c.moneda)) +' '+ cast(a.pventa as nchar) precioventa
+	,a.existencia existencias
 	from dtproductos a
 	inner join dtempresa b on b.ruc = a.rucempresa
 	inner join dtmoneda c on c.idmoneda = b.idmoneda
 	where a.codbarra =@letra AND a.rucempresa = @rucempresa
 end
-*/
+--978954855                                         
 --*********************************************** TABLA PROMOCIONES
 /*
 create table dtpromociones(idpromo int identity(1,1) primary key,

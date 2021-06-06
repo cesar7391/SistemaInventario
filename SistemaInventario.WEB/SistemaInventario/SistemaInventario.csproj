@@ -124,6 +124,7 @@
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventariosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
@@ -142,8 +143,11 @@
   <ItemGroup>
     <Content Include="Content\img\imagenes\Accesos32.png" />
     <Content Include="Content\img\imagenes\Accesos64.png" />
+    <Content Include="Content\img\imagenes\advertencia.png" />
+    <Content Include="Content\img\imagenes\ajustes.png" />
     <Content Include="Content\img\imagenes\almacen.png" />
     <Content Include="Content\img\imagenes\ambulancia.png" />
+    <Content Include="Content\img\imagenes\anadir.png" />
     <Content Include="Content\img\imagenes\borrar.png" />
     <Content Include="Content\img\imagenes\buscar.png" />
     <Content Include="Content\img\imagenes\cajas.png" />
@@ -186,12 +190,15 @@
     <Content Include="Content\img\imagenes\flecha-izquierda.png" />
     <Content Include="Content\img\imagenes\guardar.png" />
     <Content Include="Content\img\imagenes\impresora.png" />
+    <Content Include="Content\img\imagenes\inventardoc.png" />
     <Content Include="Content\img\imagenes\inventario32.png" />
     <Content Include="Content\img\imagenes\inventario64.png" />
     <Content Include="Content\img\imagenes\jugar.png" />
+    <Content Include="Content\img\imagenes\kardex.png" />
     <Content Include="Content\img\imagenes\lapiz.png" />
     <Content Include="Content\img\imagenes\medico.png" />
     <Content Include="Content\img\imagenes\moneda.png" />
+    <Content Include="Content\img\imagenes\movimientos.png" />
     <Content Include="Content\img\imagenes\new.png" />
     <Content Include="Content\img\imagenes\nueva-pagina.png" />
     <Content Include="Content\img\imagenes\pago-en-efectivo.png" />
@@ -336,6 +343,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\departamentos.js" />
     <Content Include="Scripts\app\empleados.js" />
+    <Content Include="Scripts\app\inventario.js" />
     <Content Include="Scripts\app\panel.js" />
     <Content Include="Scripts\app\productos.js" />
     <Content Include="Scripts\app\promociones.js" />
@@ -379,6 +387,7 @@
     <Content Include="Views\Productos\Productos.cshtml" />
     <Content Include="Views\Departamentos\Departamentos.cshtml" />
     <Content Include="Views\Promociones\Promociones.cshtml" />
+    <Content Include="Views\Inventarios\Inventarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SistemaInventario.BUSINESS\SistemaInventario.BUSINESS.csproj">

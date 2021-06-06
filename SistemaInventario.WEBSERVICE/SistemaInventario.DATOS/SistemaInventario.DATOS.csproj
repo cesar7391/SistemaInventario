@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DADepartamentos.cs" />
     <Compile Include="DAEmpleados.cs" />
+    <Compile Include="DAInventario.cs" />
     <Compile Include="DALogin.cs" />
     <Compile Include="DAPaises.cs" />
     <Compile Include="DAProductos.cs" />
